@@ -6,8 +6,8 @@
     "administrative_head": "Dean of Student Affairs (DoSA)",
     "campus_location": "Permanent Campus, Kutelabhata, Durg, Chhattisgarh - 491001",
     "version": "1.0.0",
-    "last_updated": "2026-11-06",
-    "total_entities": 24
+    "last_updated": "2026-11-07",
+    "total_entities": 26
   },
   "councils": [
     {
@@ -86,8 +86,14 @@
         "Campus Marketplace",
         "Canonforces (Codeforces Companion Tool)",
         "AIMS CGPA Calculator Extensions"
-      ],              
-      "tags": ["FOSS", "Web Development", "App Development", "Open Source", "Software Engineering"]
+      ],
+      "tags": [
+        "FOSS",
+        "Web Development",
+        "App Development",
+        "Open Source",
+        "Software Engineering"
+      ]
     },
     {
       "club_id": "the-epsilon",
@@ -124,7 +130,14 @@
         "Line Follower & Obstacle Avoider Bots",
         "Combat Fighting Robots (Lightweight Category)"
       ],
-      "tags": ["Robotics", "ROS", "Automation", "Embedded Systems", "Hardware", "Drones"]
+      "tags": [
+        "Robotics",
+        "ROS",
+        "Automation",
+        "Embedded Systems",
+        "Hardware",
+        "Drones"
+      ]
     },
     {
       "club_id": "electromos",
@@ -161,7 +174,15 @@
         "Custom ESP32 Development Boards",
         "Environmental Weather Station Node"
       ],
-      "tags": ["Electronics", "IoT", "PCB Design", "FPGA", "Hardware", "Arduino", "ESP32"]
+      "tags": [
+        "Electronics",
+        "IoT",
+        "PCB Design",
+        "FPGA",
+        "Hardware",
+        "Arduino",
+        "ESP32"
+      ]
     },
     {
       "club_id": "ingenuity",
@@ -196,7 +217,17 @@
         "Curated Problem Set Archive",
         "Editorial Bot for Discord/Telegram"
       ],
-      "tags": ["Competitive Programming", "Algorithms", "Data Structures", "ICPC", "C++", "Problem Solving"]
+      "achievements": [
+        "3 Teams Qualified for ICPC (International Collegiate Programming Contest) Regional Finals"
+      ],
+      "tags": [
+        "Competitive Programming",
+        "Algorithms",
+        "Data Structures",
+        "ICPC",
+        "C++",
+        "Problem Solving"
+      ]
     },
     {
       "club_id": "dsai-club",
@@ -232,7 +263,14 @@
         "SmartTriage Medical Diagnosis Pipeline",
         "Campus Automated Attendance via Face Recognition"
       ],
-      "tags": ["AI", "Machine Learning", "Deep Learning", "Data Science", "Computer Vision", "NLP"]
+      "tags": [
+        "AI",
+        "Machine Learning",
+        "Deep Learning",
+        "Data Science",
+        "Computer Vision",
+        "NLP"
+      ]
     },
     {
       "club_id": "ses",
@@ -268,7 +306,14 @@
         "Planetary Astrophotography Gallery",
         "CanSat Satellite Prototype Model"
       ],
-      "tags": ["Astronomy", "Aeromodelling", "Astrophysics", "Drones", "Stargazing", "Space Tech"]
+      "tags": [
+        "Astronomy",
+        "Aeromodelling",
+        "Astrophysics",
+        "Drones",
+        "Stargazing",
+        "Space Tech"
+      ]
     },
     {
       "club_id": "motorsports",
@@ -304,7 +349,14 @@
         "Continuously Variable Transmission (CVT) Calibration",
         "Custom Double Wishbone Suspension Geometry"
       ],
-      "tags": ["Automotive", "Mechanical Engineering", "ATV", "CAD/CAM", "Manufacturing", "Racing"]
+      "tags": [
+        "Automotive",
+        "Mechanical Engineering",
+        "ATV",
+        "CAD/CAM",
+        "Manufacturing",
+        "Racing"
+      ]
     },
     {
       "club_id": "designx",
@@ -339,7 +391,14 @@
         "Meraz & Cultscape Festival Visual Identity Design",
         "CoSA Portal UI/UX Design System"
       ],
-      "tags": ["UI/UX", "Graphic Design", "3D Modeling", "Figma", "Branding", "Digital Art"]
+      "tags": [
+        "UI/UX",
+        "Graphic Design",
+        "3D Modeling",
+        "Figma",
+        "Branding",
+        "Digital Art"
+      ]
     },
     {
       "club_id": "gdg-iitbhilai",
@@ -373,7 +432,57 @@
       "key_projects": [
         "Community Solutions for UN Sustainable Development Goals"
       ],
-      "tags": ["Google Cloud", "Flutter", "Android", "Firebase", "Web Technologies"]
+      "tags": [
+        "Google Cloud",
+        "Flutter",
+        "Android",
+        "Firebase",
+        "Web Technologies"
+      ]
+    },
+    {
+      "club_id": "spectre",
+      "name": "Spectre",
+      "tagline": "Learn to break systems !! — Ethical hacking, CTFs, and system defense",
+      "category": "Science & Technology",
+      "parent_council": "Sci-Tech Council",
+      "founded_year": 2021,
+      "status": "Active",
+      "logo_url": "/assets/logos/spectre.svg",
+      "description": "Spectre is the official cybersecurity and information security club of IIT Bhilai. The club fosters a vibrant community of ethical hackers, security researchers, and CTF competitors focused on binary exploitation, reverse engineering, web application security, cryptography, digital forensics, and network defenses.",
+      "social_links": {
+        "website": "https://0xspectre.tech",
+        "github": "",
+        "instagram": "",
+        "linkedin": "https://linkedin.com/company/0xspectre"
+      },
+      "leads": [
+        {
+          "name": "Cybersecurity Head",
+          "por_role": "Coordinator, Spectre",
+          "email": "spectre@iitbhilai.ac.in",
+          "batch": "Undergraduate"
+        }
+      ],
+      "flagship_events": [
+        "Annual Capture The Flag (CTF) Competition",
+        "Binary Exploitation & Web Penetration Testing Sprints",
+        "Ethical Hacking & Network Security Bootcamps"
+      ],
+      "key_projects": [
+        "0xSpectre Challenge Platform & Scoreboard",
+        "Campus Vulnerability Assessment & Security Audits"
+      ],
+      "tags": [
+        "Cybersecurity",
+        "Ethical Hacking",
+        "CTF",
+        "Reverse Engineering",
+        "Cryptography",
+        "Web Security",
+        "Binary Exploitation",
+        "Forensics"
+      ]
     },
     {
       "club_id": "drishya",
@@ -407,7 +516,14 @@
       "key_projects": [
         "Social Awareness Street Play Tours across Durg-Bhilai"
       ],
-      "tags": ["Dramatics", "Theatre", "Nukkad Natak", "Street Play", "Acting", "Stagecraft"]
+      "tags": [
+        "Dramatics",
+        "Theatre",
+        "Nukkad Natak",
+        "Street Play",
+        "Acting",
+        "Stagecraft"
+      ]
     },
     {
       "club_id": "beat-hackers",
@@ -441,7 +557,14 @@
       "key_projects": [
         "Annual Inter-IIT Dance Contingent Video Showcase"
       ],
-      "tags": ["Dance", "Hip-hop", "Choreography", "Contemporary", "Bollywood", "Freestyle"]
+      "tags": [
+        "Dance",
+        "Hip-hop",
+        "Choreography",
+        "Contemporary",
+        "Bollywood",
+        "Freestyle"
+      ]
     },
     {
       "club_id": "swara",
@@ -475,7 +598,15 @@
       "key_projects": [
         "Original Campus Band Compositions & Studio Tracks"
       ],
-      "tags": ["Music", "Vocals", "Instruments", "Band", "Acoustic", "Guitar", "Classical"]
+      "tags": [
+        "Music",
+        "Vocals",
+        "Instruments",
+        "Band",
+        "Acoustic",
+        "Guitar",
+        "Classical"
+      ]
     },
     {
       "club_id": "renaissance",
@@ -509,7 +640,14 @@
       "key_projects": [
         "Meraz Festival Central Installation Art"
       ],
-      "tags": ["Fine Arts", "Painting", "Sketching", "Installations", "Craft", "Visual Arts"]
+      "tags": [
+        "Fine Arts",
+        "Painting",
+        "Sketching",
+        "Installations",
+        "Craft",
+        "Visual Arts"
+      ]
     },
     {
       "club_id": "goals",
@@ -544,7 +682,14 @@
       "key_projects": [
         "Annual Student Anthology of Poems & Short Stories"
       ],
-      "tags": ["Debating", "Literary", "Public Speaking", "Creative Writing", "MUN", "Poetry"]
+      "tags": [
+        "Debating",
+        "Literary",
+        "Public Speaking",
+        "Creative Writing",
+        "MUN",
+        "Poetry"
+      ]
     },
     {
       "club_id": "quizzotica",
@@ -578,7 +723,13 @@
       "key_projects": [
         "Comprehensive Campus Quiz Repository & Question Bank"
       ],
-      "tags": ["Quizzing", "Trivia", "MELA Quiz", "General Knowledge", "Inter-IIT"]
+      "tags": [
+        "Quizzing",
+        "Trivia",
+        "MELA Quiz",
+        "General Knowledge",
+        "Inter-IIT"
+      ]
     },
     {
       "club_id": "inside-club",
@@ -613,42 +764,100 @@
         "Semester Print Magazine",
         "Student Placement & Internship Experience Diaries"
       ],
-      "tags": ["Journalism", "Media", "Newsletter", "Publishing", "Writing", "Campus News"]
+      "tags": [
+        "Journalism",
+        "Media",
+        "Newsletter",
+        "Publishing",
+        "Writing",
+        "Campus News"
+      ]
     },
     {
-      "club_id": "fps-pixel-snappers",
-      "name": "Film Production Society (FPS) & Pixel Snappers",
-      "tagline": "Capturing timeless moments through the cinematic lens",
+      "club_id": "fps",
+      "name": "Film Production Society (FPS)",
+      "tagline": "Bringing stories to life through cinematic frames",
       "category": "Media & Publications",
       "parent_council": "Media and Publication Body",
       "founded_year": 2018,
       "status": "Active",
       "logo_url": "/assets/logos/fps.svg",
-      "description": "FPS (Film Production Society) and The Pixel Snappers constitute the official film-making, cinematography, and photography society of IIT Bhilai. They document all fests, capture official convocation and sports meets, and produce short films and viral aftermovies.",
+      "description": "The official filmmaking, cinematography, and video production society of IIT Bhilai. FPS produces festival aftermovies (Meraz, Cultscape), short films, creative skits, drone cinematography reels, and senior farewell documentaries while training students in scriptwriting, camera direction, lighting, and video editing.",
       "social_links": {
         "website": "https://fps.iitbhilai.ac.in",
         "github": "",
-        "instagram": "https://instagram.com/fps_iitbhilai",
+        "instagram": "https://instagram.com/fps_iitbh",
         "linkedin": "https://linkedin.com/company/fps-iit-bhilai"
       },
       "leads": [
         {
-          "name": "Media Head",
-          "por_role": "Cinematography & Photography Head",
+          "name": "Cinematography Head",
+          "por_role": "Head of Filmmaking & Video Production",
           "email": "fps@iitbhilai.ac.in",
           "batch": "Undergraduate"
         }
       ],
       "flagship_events": [
         "Meraz & Cultscape Official Aftermovies",
-        "48-Hour Short Film Making Contest",
-        "Campus Photography Exhibitions"
+        "48-Hour Short Film Making Challenge",
+        "Cinematography & Color Grading Masterclasses"
       ],
       "key_projects": [
         "Permanent Campus Drone Tour Documentary",
-        "Senior Batch Farewell Film"
+        "Senior Batch Farewell Film & Freshman Welcomes"
       ],
-      "tags": ["Photography", "Cinematography", "Video Editing", "Film Making", "Aftermovies", "Media"]
+      "tags": [
+        "Filmmaking",
+        "Cinematography",
+        "Video Editing",
+        "Direction",
+        "Aftermovies",
+        "Short Films"
+      ]
+    },
+    {
+      "club_id": "tps",
+      "name": "The Pixel Snappers (TPS)",
+      "tagline": "Freezing moments, framing perspectives",
+      "category": "Media & Publications",
+      "parent_council": "Media and Publication Body",
+      "founded_year": 2017,
+      "status": "Active",
+      "logo_url": "/assets/logos/tps.svg",
+      "description": "The official photography club of IIT Bhilai. The Pixel Snappers capture the vibrant essence of campus life across festivals, sports tournaments, convocations, and guest visits. The club organizes photowalks, portrait sessions, astrophotography nights, and workshops in camera exposure, lens optics, and Adobe Lightroom editing.",
+      "social_links": {
+        "website": "https://tps.iitbhilai.ac.in",
+        "github": "",
+        "instagram": "https://instagram.com/thepixelsnappers",
+        "linkedin": "https://linkedin.com/company/the-pixel-snappers-iit-bhilai"
+      },
+      "leads": [
+        {
+          "name": "Photography Head",
+          "por_role": "Coordinator, The Pixel Snappers",
+          "email": "tps@iitbhilai.ac.in",
+          "batch": "Undergraduate"
+        }
+      ],
+      "flagship_events": [
+        "Annual Campus Photography Exhibition at Cultscape",
+        "Bhilai & Heritage Photowalks",
+        "Night Sky & Astrophotography Expeditions (with SES)",
+        "Weekly Theme-based Photo Contests"
+      ],
+      "key_projects": [
+        "Institute Annual Convocation & Dignitary Visual Archives",
+        "Faces of IIT Bhilai Photo Series"
+      ],
+      "tags": [
+        "Photography",
+        "DSLR",
+        "Aperture & Optics",
+        "Lightroom",
+        "Portraiture",
+        "Photojournalism",
+        "Event Coverage"
+      ]
     },
     {
       "club_id": "sports-council",
@@ -682,7 +891,16 @@
       "key_projects": [
         "Inter-IIT High Performance Conditioning Camps"
       ],
-      "tags": ["Sports", "Athletics", "Football", "Cricket", "Basketball", "Badminton", "Fitness", "Inter-IIT"]
+      "tags": [
+        "Sports",
+        "Athletics",
+        "Football",
+        "Cricket",
+        "Basketball",
+        "Badminton",
+        "Fitness",
+        "Inter-IIT"
+      ]
     },
     {
       "club_id": "polaris-smp",
@@ -716,12 +934,18 @@
       "key_projects": [
         "Polaris Online Freshman Portal & Survival Guide"
       ],
-      "tags": ["Mentorship", "Freshers", "Student Support", "Guidance", "Peer Counseling"]
+      "tags": [
+        "Mentorship",
+        "Freshers",
+        "Student Support",
+        "Guidance",
+        "Peer Counseling"
+      ]
     },
     {
       "club_id": "nss-iitbhilai",
       "name": "National Service Scheme (NSS)",
-      "tagline": "Not Me, But You — Serving society with empathy and purpose",
+      "tagline": "Not Me, But You \u2014 Serving society with empathy and purpose",
       "category": "Welfare & Governance",
       "parent_council": "Student Welfare and Governance",
       "founded_year": 2016,
@@ -751,7 +975,14 @@
       "key_projects": [
         "Free Evening Remedial Classes for Village Children"
       ],
-      "tags": ["Social Service", "NSS", "Community Outreach", "Blood Donation", "Sustainability", "Education"]
+      "tags": [
+        "Social Service",
+        "NSS",
+        "Community Outreach",
+        "Blood Donation",
+        "Sustainability",
+        "Education"
+      ]
     },
     {
       "club_id": "ebsb",
@@ -785,7 +1016,13 @@
       "key_projects": [
         "Inter-State Cultural Showcase Sessions"
       ],
-      "tags": ["Culture", "National Integration", "Heritage", "Languages", "EBSB"]
+      "tags": [
+        "Culture",
+        "National Integration",
+        "Heritage",
+        "Languages",
+        "EBSB"
+      ]
     },
     {
       "club_id": "coha-mess",
@@ -819,7 +1056,14 @@
       "key_projects": [
         "Automated Mess Rebate and Food Feedback Portal"
       ],
-      "tags": ["Hostel", "Mess", "Student Welfare", "Hygiene", "Facilities", "Dining"]
+      "tags": [
+        "Hostel",
+        "Mess",
+        "Student Welfare",
+        "Hygiene",
+        "Facilities",
+        "Dining"
+      ]
     },
     {
       "club_id": "coaa",
@@ -853,7 +1097,13 @@
       "key_projects": [
         "Student Academic Grievance System"
       ],
-      "tags": ["Academics", "Senate", "Curriculum", "Student Rights", "Course Feedback"]
+      "tags": [
+        "Academics",
+        "Senate",
+        "Curriculum",
+        "Student Rights",
+        "Course Feedback"
+      ]
     },
     {
       "club_id": "spic-macay",
@@ -887,7 +1137,13 @@
       "key_projects": [
         "Annual Classical Heritage Residency"
       ],
-      "tags": ["Classical Music", "Indian Heritage", "Dance", "Folk Art", "Culture"]
+      "tags": [
+        "Classical Music",
+        "Indian Heritage",
+        "Dance",
+        "Folk Art",
+        "Culture"
+      ]
     }
   ],
   "festivals": [

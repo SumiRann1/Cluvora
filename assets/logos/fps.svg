@@ -1,18 +1,25 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
   <defs>
     <linearGradient id="fpsGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#0284c7"/>
-      <stop offset="100%" stop-color="#4f46e5"/>
+      <stop offset="0%" stop-color="#f59e0b"/>
+      <stop offset="100%" stop-color="#d97706"/>
     </linearGradient>
   </defs>
   <rect width="200" height="200" rx="40" fill="#09090b"/>
-  <!-- Camera body -->
-  <rect x="45" y="60" width="110" height="75" rx="14" fill="#27272a" stroke="#71717a" stroke-width="3"/>
-  <path d="M80 60 L88 48 H112 L120 60 Z" fill="#3f3f46"/>
-  <!-- Lens circles -->
-  <circle cx="100" cy="98" r="26" fill="url(#fpsGrad)" stroke="#e4e4e7" stroke-width="3"/>
-  <circle cx="100" cy="98" r="14" fill="#0f172a" stroke="#38bdf8" stroke-width="2"/>
-  <!-- Flash & Aperture -->
-  <circle cx="138" cy="75" r="5" fill="#ef4444"/>
-  <text x="100" y="168" font-family="Arial, sans-serif" font-weight="bold" font-size="14" text-anchor="middle" fill="#f4f4f5" letter-spacing="2">FPS &amp; PIXELS</text>
+  <!-- Film Clapperboard & Camera -->
+  <g transform="translate(35, 42)">
+    <!-- Camera Body -->
+    <rect x="10" y="42" width="75" height="55" rx="8" fill="#27272a" stroke="#71717a" stroke-width="3"/>
+    <!-- Film Reels on top -->
+    <circle cx="32" cy="28" r="14" fill="#18181b" stroke="#fbbf24" stroke-width="3"/>
+    <circle cx="32" cy="28" r="5" fill="#fbbf24"/>
+    <circle cx="62" cy="28" r="14" fill="#18181b" stroke="#fbbf24" stroke-width="3"/>
+    <circle cx="62" cy="28" r="5" fill="#fbbf24"/>
+    <!-- Lens cone -->
+    <path d="M85 52 L118 40 V98 L85 86 Z" fill="url(#fpsGrad)"/>
+    <!-- Rec dot -->
+    <circle cx="22" cy="54" r="4" fill="#ef4444"/>
+  </g>
+  <text x="100" y="160" font-family="Arial, sans-serif" font-weight="900" font-size="14" text-anchor="middle" fill="#ffffff" letter-spacing="2">FPS</text>
+  <text x="100" y="176" font-family="Arial, sans-serif" font-weight="bold" font-size="10" text-anchor="middle" fill="#fbbf24" letter-spacing="1.5">FILM PRODUCTION</text>
 </svg>
