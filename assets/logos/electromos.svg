@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <defs>
+    <linearGradient id="elGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#06b6d4"/>
+      <stop offset="100%" stop-color="#2563eb"/>
+    </linearGradient>
+  </defs>
+  <rect width="200" height="200" rx="40" fill="#020617"/>
+  <!-- Microchip & circuit traces -->
+  <rect x="65" y="55" width="70" height="70" rx="10" fill="#0f172a" stroke="url(#elGrad)" stroke-width="4"/>
+  <!-- Chip Pins -->
+  <line x1="80" y1="45" x2="80" y2="55" stroke="#38bdf8" stroke-width="4" stroke-linecap="round"/>
+  <line x1="100" y1="45" x2="100" y2="55" stroke="#38bdf8" stroke-width="4" stroke-linecap="round"/>
+  <line x1="120" y1="45" x2="120" y2="55" stroke="#38bdf8" stroke-width="4" stroke-linecap="round"/>
+  <line x1="80" y1="125" x2="80" y2="135" stroke="#38bdf8" stroke-width="4" stroke-linecap="round"/>
+  <line x1="100" y1="125" x2="100" y2="135" stroke="#38bdf8" stroke-width="4" stroke-linecap="round"/>
+  <line x1="120" y1="125" x2="120" y2="135" stroke="#38bdf8" stroke-width="4" stroke-linecap="round"/>
+  <line x1="45" y1="75" x2="65" y2="75" stroke="#38bdf8" stroke-width="4" stroke-linecap="round"/>
+  <line x1="45" y1="95" x2="65" y2="95" stroke="#38bdf8" stroke-width="4" stroke-linecap="round"/>
+  <line x1="45" y1="115" x2="65" y2="115" stroke="#38bdf8" stroke-width="4" stroke-linecap="round"/>
+  <line x1="135" y1="75" x2="155" y2="75" stroke="#38bdf8" stroke-width="4" stroke-linecap="round"/>
+  <line x1="135" y1="95" x2="155" y2="95" stroke="#38bdf8" stroke-width="4" stroke-linecap="round"/>
+  <line x1="135" y1="115" x2="155" y2="115" stroke="#38bdf8" stroke-width="4" stroke-linecap="round"/>
+  <!-- Lightning spark in center -->
+  <path d="M103 68 L88 92 H102 L97 112 L114 88 H100 Z" fill="#facc15"/>
+  <text x="100" y="170" font-family="Arial, sans-serif" font-weight="bold" font-size="13" text-anchor="middle" fill="#e0f2fe" letter-spacing="2">ELECTROMOS</text>
+</svg>
