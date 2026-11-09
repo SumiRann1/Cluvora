@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f7f5fa">
+  <meta name="description"
+    content="Explore student societies, welfare initiatives, sports contingents, and campus life bodies at IIT Bhilai.">
+  <link rel="icon" type="image/svg+xml" href="../assets/logos/cosa-crest.svg">
+  <link rel="stylesheet" href="../style/global.css">
+  <link rel="stylesheet" href="../style/soc.css">
+  <title>Societies | Cluvora — IIT Bhilai</title>
+  <script>
+    const saved_theme = localStorage.getItem("theme");
+    const prefers_dark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    document.documentElement.setAttribute("data-theme", saved_theme || (prefers_dark ? "dark" : "light"));
+  </script>
+</head>
+
+<body>
+  <div class="wrap">
+    <header class="topbar">
+      <a class="brand" href="../Home/index.html" aria-label="Cluvora home">
+        <img src="../assets/logos/cosa-crest.svg" alt="Council of Student Affairs logo" width="44" height="44">
+        <span><strong>Cluvora</strong><small>Student life · IIT Bhilai</small></span>
+      </a>
+      <div class="nav-area">
+        <nav class="main-nav" aria-label="Main navigation">
+          <a href="../Home/index.html">Home</a>
+          <a href="../Tech%20Clubs/tech_clubs.html">Tech clubs</a>
+          <a href="../Cultural%20Clubs/cult_clubs.html">Cultural clubs</a>
+          <a href="soc.html" aria-current="page">Societies</a>
+          <a href="../Anouncements/announcements.html">Announcements</a>
+          <a href="../Contact%20Us/contact_us.html">Contact</a>
+        </nav>
+        <button class="theme-toggle" id="theme-toggle" type="button" aria-pressed="false"
+          aria-label="Switch to dark theme">
+          <span aria-hidden="true" id="theme-icon">◐</span><span id="theme-label">Dark mode</span>
+        </button>
+      </div>
+    </header>
+  </div>
+
+  <main>
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div class="hero-copy-block">
+          <span class="eyebrow">Student Welfare, Governance &amp; Sports · IIT Bhilai</span>
+          <h1>Community thrives<br><em>beyond the classroom.</em></h1>
+          <p class="hero-copy">Discover the student-led societies, mentorship networks, sports contingents, and
+            governance bodies shaping campus life at IIT Bhilai. Connect with peers, lead initiatives, and build lasting
+            bonds.</p>
+          <div class="hero-actions">
+            <a class="button" href="#soc-directory">Explore societies <span aria-hidden="true">↘</span></a>
+            <a class="button secondary" href="https://iitbhilai.ac.in/index.php?pid=pro_student" target="_blank"
+              rel="noopener noreferrer">About CoSA</a>
+          </div>
+        </div>
+        <div class="hero-art" role="img"
+          aria-label="A visual overview of student societies and campus life across IIT Bhilai">
+          <div class="art-top"><span class="art-label">Connect · Serve · Lead</span><span class="art-mark"
+              aria-hidden="true">✳</span></div>
+          <div class="art-headline">Purpose is only<br><span>the foundation.</span></div>
+          <div class="interest-grid">
+            <div class="interest-card featured"><span>01 / Support</span><strong>Mentorship</strong></div>
+            <div class="interest-card"><span>02 / Compete</span><strong>Athletics</strong></div>
+            <div class="interest-card"><span>03 / Serve</span><strong>Community</strong></div>
+            <div class="interest-card"><span>04 / Govern</span><strong>Welfare</strong></div>
+          </div>
+          <div class="art-foot"><span>Societies &amp; campus bodies</span><span>IIT Bhilai · India</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section directory-intro" id="soc-directory">
+      <div class="wrap">
+        <div class="section-head">
+          <div><span class="eyebrow">Find your corner</span>
+            <h2>Meet the changemakers.</h2>
+          </div>
+          <p class="section-intro">Explore student societies, welfare initiatives, sports contingents, and governance
+            bodies. Search by name, interest, or domain to find a community where you can contribute and grow.</p>
+        </div>
+        <div class="directory-meta"><span class="directory-mark" aria-hidden="true">✳</span><span>THE SOCIETIES &amp; CAMPUS LIFE DIRECTORY</span></div>
+      </div>
+    </section>
+
+    <section class="club-grid" id="soc-teams-list" aria-label="Student societies and campus life bodies">
+      <div id="loading-spinner" class="loading-state">
+        <span class="loading-spinner" aria-hidden="true"></span>
+        <p>Loading student societies and campus life bodies...</p>
+      </div>
+    </section>
+
+    <section class="section tinted closing-section">
+      <div class="wrap">
+        <div class="closing">
+          <h2>Have an initiative for campus life? Find the people who will champion it with you.</h2>
+          <a class="button" href="../Contact%20Us/contact_us.html">Connect with CoSA <span
+              aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-top">
+        <div>
+          <a class="brand" href="../Home/index.html">
+            <img src="../assets/logos/cosa-crest.svg" alt="" width="40" height="40" loading="lazy">
+            <span><strong>Cluvora</strong><small>Student life · IIT Bhilai</small></span>
+          </a>
+          <p class="footer-note">A student-community discovery experience for the Council of
+            Student Affairs, IIT Bhilai.</p>
+        </div>
+        <nav class="footer-links" aria-label="Footer navigation">
+          <a href="../Tech%20Clubs/tech_clubs.html">Tech clubs</a>
+          <a href="../Cultural%20Clubs/cult_clubs.html">Cultural clubs</a>
+          <a href="soc.html">Societies</a>
+          <a href="../Anouncements/announcements.html">Announcements</a>
+          <a href="../Contact%20Us/contact_us.html">Contact</a>
+          <a href="https://polaris.iitbhilai.ac.in/views/cosa.php" target="_blank" rel="noopener noreferrer">Official
+            CoSA portal ↗</a>
+        </nav>
+      </div>
+      <div class="footer-bottom">
+        <span>© Council of Student Affairs · Indian Institute of Technology Bhilai</span>
+        <span>Built around student life.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/data.js" defer></script>
+  <script src="../js/soc.js" defer></script>
+</body>
+
+</html>
