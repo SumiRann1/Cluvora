@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" role="img" aria-labelledby="title desc">
+  <title id="title">CoSA crest — IIT Bhilai</title>
+  <desc id="desc">A community crest showing three people connected around a shared point. It symbolizes belonging, student voice, and collective action.</desc>
+  <defs>
+    <linearGradient id="crest-ring" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#8056B2"/>
+      <stop offset="1" stop-color="#432067"/>
+    </linearGradient>
+    <linearGradient id="crest-mint" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#A5EBDD"/>
+      <stop offset="1" stop-color="#4AB99F"/>
+    </linearGradient>
+  </defs>
+  <circle cx="120" cy="120" r="112" fill="#F8F5FB"/>
+  <circle cx="120" cy="120" r="106" fill="none" stroke="url(#crest-ring)" stroke-width="5"/>
+  <circle cx="120" cy="120" r="96" fill="none" stroke="#D9CBE7" stroke-width="1.6"/>
+  <path d="M53 54A94 94 0 0 1 187 54" fill="none" stroke="#BCA6D3" stroke-width="3" stroke-linecap="round"/>
+  <path d="M187 186A94 94 0 0 1 53 186" fill="none" stroke="#65CDB5" stroke-width="3" stroke-linecap="round"/>
+  <text x="120" y="38" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="850" letter-spacing="3" fill="#432067">CoSA</text>
+  <text x="120" y="211" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="11" font-weight="850" letter-spacing="3.2" fill="#432067">IIT BHILAI</text>
+  <g>
+    <circle cx="120" cy="76" r="10" fill="url(#crest-ring)"/>
+    <circle cx="82" cy="105" r="9" fill="#8056B2"/>
+    <circle cx="158" cy="105" r="9" fill="url(#crest-mint)"/>
+    <path d="M98 125c1-16 10-24 22-24s21 8 22 24" fill="none" stroke="url(#crest-ring)" stroke-width="9" stroke-linecap="round"/>
+    <path d="M59 151c2-17 11-27 23-27 9 0 17 5 22 15" fill="none" stroke="#8056B2" stroke-width="9" stroke-linecap="round"/>
+    <path d="M181 151c-2-17-11-27-23-27-9 0-17 5-22 15" fill="none" stroke="url(#crest-mint)" stroke-width="9" stroke-linecap="round"/>
+    <path d="M70 160c15 13 32 19 50 19s35-6 50-19" fill="none" stroke="#432067" stroke-width="5" stroke-linecap="round"/>
+    <path d="M120 140v20" stroke="#65CDB5" stroke-width="4.5" stroke-linecap="round"/>
+    <path d="m120 129 6 8-6 8-6-8Z" fill="#65CDB5" stroke="#432067" stroke-width="1.6"/>
+    <circle cx="120" cy="160" r="3.5" fill="#F8F5FB" stroke="#432067" stroke-width="2"/>
+  </g>
+</svg>

@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <defs>
+    <linearGradient id="swaraGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f59e0b"/>
+      <stop offset="100%" stop-color="#ef4444"/>
+    </linearGradient>
+  </defs>
+  <rect width="200" height="200" rx="40" fill="#1c1917"/>
+  <!-- Treble clef and Tanpura strings -->
+  <circle cx="75" cy="115" r="16" fill="url(#swaraGrad)"/>
+  <circle cx="130" cy="100" r="16" fill="url(#swaraGrad)"/>
+  <path d="M91 115 V55 C91 40 146 35 146 50 V100" fill="none" stroke="url(#swaraGrad)" stroke-width="8" stroke-linecap="round"/>
+  <line x1="91" y1="68" x2="146" y2="60" stroke="#fbbf24" stroke-width="6"/>
+  <line x1="91" y1="82" x2="146" y2="74" stroke="#fbbf24" stroke-width="6"/>
+  <text x="100" y="170" font-family="Arial, sans-serif" font-weight="bold" font-size="16" text-anchor="middle" fill="#fef3c7" letter-spacing="3">SWARA</text>
+</svg>

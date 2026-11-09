@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <defs>
+    <linearGradient id="fpsGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f59e0b"/>
+      <stop offset="100%" stop-color="#d97706"/>
+    </linearGradient>
+  </defs>
+  <rect width="200" height="200" rx="40" fill="#09090b"/>
+  <!-- Film Clapperboard & Camera -->
+  <g transform="translate(35, 42)">
+    <!-- Camera Body -->
+    <rect x="10" y="42" width="75" height="55" rx="8" fill="#27272a" stroke="#71717a" stroke-width="3"/>
+    <!-- Film Reels on top -->
+    <circle cx="32" cy="28" r="14" fill="#18181b" stroke="#fbbf24" stroke-width="3"/>
+    <circle cx="32" cy="28" r="5" fill="#fbbf24"/>
+    <circle cx="62" cy="28" r="14" fill="#18181b" stroke="#fbbf24" stroke-width="3"/>
+    <circle cx="62" cy="28" r="5" fill="#fbbf24"/>
+    <!-- Lens cone -->
+    <path d="M85 52 L118 40 V98 L85 86 Z" fill="url(#fpsGrad)"/>
+    <!-- Rec dot -->
+    <circle cx="22" cy="54" r="4" fill="#ef4444"/>
+  </g>
+  <text x="100" y="160" font-family="Arial, sans-serif" font-weight="900" font-size="14" text-anchor="middle" fill="#ffffff" letter-spacing="2">FPS</text>
+  <text x="100" y="176" font-family="Arial, sans-serif" font-weight="bold" font-size="10" text-anchor="middle" fill="#fbbf24" letter-spacing="1.5">FILM PRODUCTION</text>
+</svg>

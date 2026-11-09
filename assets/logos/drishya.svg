@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <defs>
+    <linearGradient id="maskGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f59e0b"/>
+      <stop offset="100%" stop-color="#b45309"/>
+    </linearGradient>
+  </defs>
+  <rect width="200" height="200" rx="40" fill="#1c1917"/>
+  <!-- Comedy mask -->
+  <g transform="translate(55, 45)">
+    <path d="M10 20 C10 0 55 0 55 20 C55 55 45 75 32 75 C20 75 10 55 10 20 Z" fill="url(#maskGrad)"/>
+    <ellipse cx="24" cy="28" rx="4" ry="6" fill="#1c1917"/>
+    <ellipse cx="42" cy="28" rx="4" ry="6" fill="#1c1917"/>
+    <path d="M22 50 Q33 65 44 50" fill="none" stroke="#1c1917" stroke-width="4" stroke-linecap="round"/>
+  </g>
+  <!-- Tragedy mask -->
+  <g transform="translate(85, 65)">
+    <path d="M10 20 C10 0 55 0 55 20 C55 55 45 75 32 75 C20 75 10 55 10 20 Z" fill="#b91c1c"/>
+    <ellipse cx="24" cy="28" rx="4" ry="6" fill="#1c1917"/>
+    <ellipse cx="42" cy="28" rx="4" ry="6" fill="#1c1917"/>
+    <path d="M22 56 Q33 42 44 56" fill="none" stroke="#1c1917" stroke-width="4" stroke-linecap="round"/>
+  </g>
+  <text x="100" y="172" font-family="Arial, sans-serif" font-weight="bold" font-size="15" text-anchor="middle" fill="#fef3c7" letter-spacing="3">DRISHYA</text>
+</svg>
