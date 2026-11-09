@@ -45,10 +45,6 @@ function render_cards(clubs_2_render) {
       ? `<p><strong>Flagship Initiatives:</strong> ${escape_html(club.flagship_events.join(', '))}</p>`
       : '';
 
-    const achievementsHTML = (club.achievements && club.achievements.length > 0)
-      ? `<p><strong>Recent Honour:</strong> ${escape_html(club.achievements.join(', '))}</p>`
-      : '';
-
     const links = [];
     const webUrl = club.social_links?.website || club.source_url;
     if (webUrl) {
@@ -80,8 +76,6 @@ function render_cards(clubs_2_render) {
         </header>
 
         <p class="club-desc">${escape_html(club.description || '')}</p>
-
-        ${achievementsHTML}
 
         <ul class="club-tags" aria-label="Tags">
           ${tagsHTML}
