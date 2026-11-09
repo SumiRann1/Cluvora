@@ -1,433 +1,248 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>IIT Bhilai CoSA - Council of Student Affairs</title>
+  <meta name="theme-color" content="#f7f5fa">
+  <meta name="description"
+    content="Discover student communities, clubs, and campus life at IIT Bhilai through the Council of Student Affairs.">
+  <link rel="icon" type="image/svg+xml" href="../assets/logos/cosa-crest.svg">
+  <link rel="stylesheet" href="../style/global.css">
+  <link rel="stylesheet" href="../style/index.css">
+  <title>Cluvora — Student Life at IIT Bhilai</title>
+  <script>
+    const saved_theme = localStorage.getItem("theme");
+    const prefers_dark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    document.documentElement.setAttribute("data-theme", saved_theme || (prefers_dark ? "dark" : "light"));
+  </script>
 </head>
+
 <body>
-  <header>
-    <nav>
-      <a href="https://iitbhilai.ac.in/">
-        <img src="./../assets/logos/iitbh-logo.jpg" alt="IIT Bhilai Logo" height="60" style="height: 60px; width: auto; vertical-align: middle;" loading="lazy">
+  <div class="wrap">
+    <header class="topbar">
+      <a class="brand" href="index.html" aria-label="Cluvora home">
+        <img src="../assets/logos/cosa-crest.svg" alt="Council of Student Affairs logo" width="44" height="44">
+        <span><strong>Cluvora</strong><small>Student life · IIT Bhilai</small></span>
       </a>
-        <span><a href="index.html">Home</a></span>
-        <span><a href="./../Tech Clubs/tech_clubs.html">Tech Clubs</a></span>
-        <span><a href="./../Cultural Clubs/cult_clubs.html">Cultural Clubs</a></span>
-        <span><a href="./../Societies/soc.html">Societies</a></span>
-        <span><a href="./../Anouncements/announcements.html">Announcements</a></span>
-        <span><a href="./../Contact Us/contact_us.html">Contact Us</a></span>
-    </nav>
-  </header>
+      <div class="nav-area">
+        <nav class="main-nav" aria-label="Main navigation">
+          <a href="index.html" aria-current="page">Home</a>
+          <a href="../Tech%20Clubs/tech_clubs.html">Tech clubs</a>
+          <a href="../Cultural%20Clubs/cult_clubs.html">Cultural clubs</a>
+          <a href="../Societies/soc.html">Societies</a>
+          <a href="../Anouncements/announcements.html">Announcements</a>
+          <a href="../Contact%20Us/contact_us.html">Contact</a>
+        </nav>
+        <button class="theme-toggle" id="theme-toggle" type="button" aria-pressed="false"
+          aria-label="Switch to dark theme">
+          <span aria-hidden="true" id="theme-icon">◐</span><span id="theme-label">Dark mode</span>
+        </button>
+      </div>
+    </header>
+  </div>
 
   <main>
-    <section id="hero">
-      <p>Tinker • Innovate • Create</p>
-      <h1>
-        COUNCIL OF <br>
-        STUDENT <br>
-        AFFAIRS
-      </h1>
-      <p>Indian Institute of Technology Bhilai</p>
-
-      <nav aria-label="Quick Links">
-        <a href="#clubs">Explore Clubs</a>
-        <a href="#tech-teams">Tech Teams & Culturals</a>
-        <a href="#communities">Societies & Governance</a>
-      </nav>
-    </section>
-
-    <!-- About Us Section -->
-    <section id="about">
-      <h2>About Us</h2>
-      <div>
-        <p>
-          The Council of Student Affairs (CoSA) and its Science and Technology Council at IIT Bhilai
-          stand at the forefront of nurturing student innovation, technical proficiency, and collaborative
-          leadership. Operating from our permanent campus in Kutelabhata, Bhilai, the council provides
-          students with state-of-the-art infrastructure, mentorship, and resources needed to translate
-          inventive concepts into real-world applications across a comprehensive range of student bodies.
-        </p>
-        <p>
-          With an enduring focus on fostering creativity, hands-on engineering, and scientific temperament,
-          CoSA plays a pivotal role in organizing technical workshops, hackathons, open-source initiatives
-          such as CodePeak, and competitive contingents for the Inter-IIT Tech Meet and BAJA SAEINDIA. From
-          competitive coding and artificial intelligence to robotics and automotive design, the council serves
-          as the vibrant hub for student-driven innovation at IIT Bhilai.
-        </p>
-      </div>
-
-      <!-- Stats -->
-      <div>
+    <section class="hero">
+      <div class="wrap hero-grid">
         <div>
-          <h3>26+</h3>
-          <p>Clubs & Student Bodies</p>
+          <span class="eyebrow">Council of Student Affairs · IIT Bhilai</span>
+          <h1>Beyond the classroom.<br><em>Into everything.</em></h1>
+          <p class="hero-copy">A campus is shaped by the things students build, the ideas they share, the stages they
+            step onto, and the communities they find. Start exploring student life at IIT Bhilai.</p>
+          <div class="hero-actions">
+            <a class="button" href="#communities">Explore communities <span aria-hidden="true">↗</span></a>
+            <a class="button secondary" href="#about-cosa">About CoSA</a>
+          </div>
         </div>
-        <div>
-          <h3>5</h3>
-          <p>CoSA Councils</p>
-        </div>
-        <div>
-          <h3>50+</h3>
-          <p>Yearly Events & Sprints</p>
-        </div>
-        <div>
-          <h3>1500+</h3>
-          <p>Students Catered</p>
+        <div class="hero-art" role="img"
+          aria-label="Illustration of student communities across technology, culture, and campus life">
+          <div class="art-top">
+            <span class="art-label">A community of many interests</span>
+            <span class="art-mark" aria-hidden="true">✳</span>
+          </div>
+          <div class="art-headline">Find your people.<br><span>Make your mark.</span></div>
+          <div class="orbit">
+            <div class="orbit-card featured"><span>01 / Build</span><strong>Technology</strong></div>
+            <div class="orbit-card"><span>02 / Create</span><strong>Culture</strong></div>
+            <div class="orbit-card"><span>03 / Compete</span><strong>Sports</strong></div>
+            <div class="orbit-card"><span>04 / Connect</span><strong>Societies</strong></div>
+          </div>
+          <div class="art-foot"><span>Student-led experiences</span><span>IIT Bhilai · India</span></div>
         </div>
       </div>
     </section>
 
-        <!-- Our Family Section -->
-    <section id="our-family">
-      <h2>Our Family</h2>
-
-      <!-- Clubs -->
-      <section id="clubs">
-        <h3>Science &amp; Technology Clubs</h3>
-        <div>
-          <a href="https://openlake.in" title="OpenLake">
-            <img src="./../assets/logos/openlake.svg" alt="OpenLake logo" width="64" height="64" style="width: 64px; height: 64px; object-fit: contain;" loading="lazy">
-          </a>
-          <a href="https://epsilon.iitbhilai.ac.in" title="The Epsilon">
-            <img src="./../assets/logos/epsilon.svg" alt="The Epsilon logo" width="64" height="64" style="width: 64px; height: 64px; object-fit: contain;" loading="lazy">
-          </a>
-          <a href="https://electromos.netlify.app" title="Electromos">
-            <img src="./../assets/logos/electromos.svg" alt="Electromos logo" width="64" height="64" style="width: 64px; height: 64px; object-fit: contain;" loading="lazy">
-          </a>
-          <a href="https://ingenuity.iitbhilai.ac.in" title="Ingenuity">
-            <img src="./../assets/logos/ingenuity.svg" alt="Ingenuity logo" width="64" height="64" style="width: 64px; height: 64px; object-fit: contain;" loading="lazy">
-          </a>
-          <a href="https://dsai-iitbhilai.github.io" title="DSAI Club">
-            <img src="./../assets/logos/dsai.svg" alt="DSAI Club logo" width="64" height="64" style="width: 64px; height: 64px; object-fit: contain;" loading="lazy">
-          </a>
-          <a href="https://ses-iitbhilai.vercel.app" title="Space Exploration Society (SES)">
-            <img src="./../assets/logos/ses.svg" alt="Space Exploration Society (SES) logo" width="64" height="64" style="width: 64px; height: 64px; object-fit: contain;" loading="lazy">
-          </a>
-          <a href="https://motorsports.iitbhilai.ac.in" title="IIT Bhilai Motorsports">
-            <img src="./../assets/logos/motorsports.svg" alt="IIT Bhilai Motorsports logo" width="64" height="64" style="width: 64px; height: 64px; object-fit: contain;" loading="lazy">
-          </a>
-          <a href="https://designx.iitbhilai.ac.in" title="DesignX">
-            <img src="./../assets/logos/designx.svg" alt="DesignX logo" width="64" height="64" style="width: 64px; height: 64px; object-fit: contain;" loading="lazy">
-          </a>
-          <a href="https://gdg.community.dev/iit-bhilai" title="GDG on Campus IIT Bhilai">
-            <img src="./../assets/logos/gdg.svg" alt="GDG on Campus IIT Bhilai logo" width="64" height="64" style="width: 64px; height: 64px; object-fit: contain;" loading="lazy">
-          </a>
-          <a href="https://0xspectre.tech" title="Spectre (Cybersecurity Club)">
-            <img src="./../assets/logos/spectre.svg" alt="Spectre logo" width="64" height="64" style="width: 64px; height: 64px; object-fit: contain;" loading="lazy">
-          </a>
+    <section class="section tinted" id="about-cosa">
+      <div class="wrap about-grid">
+        <div class="about-aside">
+          <span class="eyebrow">The student body</span>
+          <h2
+            style="font-family:'Plus Jakarta Sans',Inter,sans-serif;font-size:clamp(2rem,4vw,3.1rem);line-height:1.08;letter-spacing:-.06em;margin:14px 0 16px;">
+            A voice for<br>student life.</h2>
+          <p>Indian Institute of Technology Bhilai</p>
+          <a class="text-link" href="https://iitbhilai.ac.in/index.php?pid=pro_student" target="_blank"
+            rel="noopener noreferrer">IIT Bhilai · About CoSA ↗</a>
         </div>
-      </section>
-
-      <!-- Tech Teams & Cultural Bodies -->
-      <section id="tech-teams">
-        <h3>Cultural &amp; Media Bodies</h3>
-        <div>
-          <a href="https://drishya.iitbhilai.ac.in" title="Drishya">
-            <img src="./../assets/logos/drishya.svg" alt="Drishya logo" width="64" height="64" style="width: 64px; height: 64px; object-fit: contain;" loading="lazy">
-          </a>
-          <a href="https://beathackers.iitbhilai.ac.in" title="Beat Hackers">
-            <img src="./../assets/logos/beathackers.svg" alt="Beat Hackers logo" width="64" height="64" style="width: 64px; height: 64px; object-fit: contain;" loading="lazy">
-          </a>
-          <a href="https://swara.iitbhilai.ac.in" title="Swara">
-            <img src="./../assets/logos/swara.svg" alt="Swara logo" width="64" height="64" style="width: 64px; height: 64px; object-fit: contain;" loading="lazy">
-          </a>
-          <a href="https://renaissance.iitbhilai.ac.in" title="Renaissance">
-            <img src="./../assets/logos/renaissance.svg" alt="Renaissance logo" width="64" height="64" style="width: 64px; height: 64px; object-fit: contain;" loading="lazy">
-          </a>
-          <a href="https://goals.iitbhilai.ac.in" title="GOALS">
-            <img src="./../assets/logos/goals.svg" alt="GOALS logo" width="64" height="64" style="width: 64px; height: 64px; object-fit: contain;" loading="lazy">
-          </a>
-          <a href="https://quizzotica.iitbhilai.ac.in" title="Quizzotica">
-            <img src="./../assets/logos/quizzotica.svg" alt="Quizzotica logo" width="64" height="64" style="width: 64px; height: 64px; object-fit: contain;" loading="lazy">
-          </a>
-          <a href="https://inside.iitbhilai.ac.in" title="Inside Club">
-            <img src="./../assets/logos/inside.svg" alt="Inside Club logo" width="64" height="64" style="width: 64px; height: 64px; object-fit: contain;" loading="lazy">
-          </a>
-          <a href="https://fps.iitbhilai.ac.in" title="Film Production Society (FPS)">
-            <img src="./../assets/logos/fps.svg" alt="Film Production Society (FPS) logo" width="64" height="64" style="width: 64px; height: 64px; object-fit: contain;" loading="lazy">
-          </a>
-          <a href="https://tps.iitbhilai.ac.in" title="The Pixel Snappers (TPS)">
-            <img src="./../assets/logos/tps.svg" alt="The Pixel Snappers (TPS) logo" width="64" height="64" style="width: 64px; height: 64px; object-fit: contain;" loading="lazy">
-          </a>
-          <a href="https://spicmacay.org" title="SPIC MACAY IIT Bhilai Chapter">
-            <img src="./../assets/logos/spicmacay.svg" alt="SPIC MACAY IIT Bhilai Chapter logo" width="64" height="64" style="width: 64px; height: 64px; object-fit: contain;" loading="lazy">
-          </a>
+        <div class="about-copy">
+          <p>The Council of Student Affairs (CoSA) is the student representative body that helps conduct and manage
+            student-related activities at IIT Bhilai.</p>
+          <p>Through student representatives, CoSA supports holistic development, coordinates campus clubs and
+            activities, and provides a channel for communicating student concerns to institute authorities.</p>
+          <p>From technical exploration to creative expression, sport, and community initiatives, student groups make
+            space to learn with and from one another.</p>
         </div>
-      </section>
-
-      <!-- Communities -->
-      <section id="communities">
-        <h3>Governance, Sports &amp; Welfare Bodies</h3>
-        <div>
-          <a href="https://sports.iitbhilai.ac.in" title="Sports Council &amp; Inter-IIT Contingent">
-            <img src="./../assets/logos/sports.svg" alt="Sports Council &amp; Inter-IIT Contingent logo" width="64" height="64" style="width: 64px; height: 64px; object-fit: contain;" loading="lazy">
-          </a>
-          <a href="https://polaris.iitbhilai.ac.in" title="Polaris (Student Mentorship Program)">
-            <img src="./../assets/logos/polaris.svg" alt="Polaris (Student Mentorship Program) logo" width="64" height="64" style="width: 64px; height: 64px; object-fit: contain;" loading="lazy">
-          </a>
-          <a href="https://nss.iitbhilai.ac.in" title="National Service Scheme (NSS)">
-            <img src="./../assets/logos/nss.svg" alt="National Service Scheme (NSS) logo" width="64" height="64" style="width: 64px; height: 64px; object-fit: contain;" loading="lazy">
-          </a>
-          <a href="https://iitbhilai.ac.in/index.php?pid=ebsb" title="Ek Bharat Shreshtha Bharat (EBSB)">
-            <img src="./../assets/logos/ebsb.svg" alt="Ek Bharat Shreshtha Bharat (EBSB) logo" width="64" height="64" style="width: 64px; height: 64px; object-fit: contain;" loading="lazy">
-          </a>
-          <a href="https://iitbhilai.ac.in/index.php?pid=hostels" title="Council of Hostel Affairs (CoHA) &amp; Mess Committee">
-            <img src="./../assets/logos/coha.svg" alt="Council of Hostel Affairs (CoHA) &amp; Mess Committee logo" width="64" height="64" style="width: 64px; height: 64px; object-fit: contain;" loading="lazy">
-          </a>
-          <a href="https://iitbhilai.ac.in/index.php?pid=academic_affairs" title="Council of Academic Affairs (CoAA)">
-            <img src="./../assets/logos/coaa.svg" alt="Council of Academic Affairs (CoAA) logo" width="64" height="64" style="width: 64px; height: 64px; object-fit: contain;" loading="lazy">
-          </a>
-        </div>
-      </section>
-    </section>
-
-    <!-- Recent Achievements Section -->
-    <section id="achievements">
-      <h2>Recent Achievements</h2>
-
-      <div>
-        <article>
-          <a href="https://icpc.global/" target="_blank" rel="noopener noreferrer">
-            <img src="./../assets/logos/ingenuity.svg" alt="Ingenuity ICPC Qualifications" height="48" style="height: 48px; width: auto;">
-          </a>
-          <div>
-            <h3><a href="https://icpc.global/" target="_blank" rel="noopener noreferrer">3 Teams Qualified for ICPC Regional Finals — Ingenuity Club</a></h3>
-            <p>Three competitive programming teams from IIT Bhilai representing the Ingenuity club have officially qualified for the prestigious International Collegiate Programming Contest (ICPC) Regional Finals, demonstrating premier algorithmic problem-solving skills at the highest national level.</p>
-            <time datetime="2026-11-06">November 06, 2026</time>
-            <p><a href="https://icpc.global/" target="_blank" rel="noopener noreferrer">View Official ICPC Global &rarr;</a></p>
-          </div>
-        </article>
-
-        <article>
-          <a href="https://education21.in/iit-bhilai-team-wins-union-bank-of-indias-idea-2-0-hackathon-under-the-psbs-hackathon-series-2026/" target="_blank" rel="noopener noreferrer">
-            <img src="./../assets/logos/iitbh-logo.jpg" alt="Union Bank IDEA Hackathon Winners" height="48" style="height: 48px; width: auto;">
-          </a>
-          <div>
-            <h3><a href="https://education21.in/iit-bhilai-team-wins-union-bank-of-indias-idea-2-0-hackathon-under-the-psbs-hackathon-series-2026/" target="_blank" rel="noopener noreferrer">1st Prize Winners — Union Bank of India IDEA 2.0 National Hackathon</a></h3>
-            <p>IIT Bhilai's student team 'Syntax_error' clinched 1st Place nationally among premier institutions across India, developing an innovative AI and cybersecurity solution for banking fraud detection.</p>
-            <time datetime="2025-02-18">February 18, 2025</time>
-            <p><a href="https://education21.in/iit-bhilai-team-wins-union-bank-of-indias-idea-2-0-hackathon-under-the-psbs-hackathon-series-2026/" target="_blank" rel="noopener noreferrer">Read Original Article &rarr;</a></p>
-          </div>
-        </article>
-
-        <article>
-          <a href="https://www.bajasaeindia.org/" target="_blank" rel="noopener noreferrer">
-            <img src="./../assets/logos/motorsports.svg" alt="BAJA SAEINDIA IIT Bhilai Motorsports" height="48" style="height: 48px; width: auto;">
-          </a>
-          <div>
-            <h3><a href="https://www.bajasaeindia.org/" target="_blank" rel="noopener noreferrer">BAJA SAEINDIA 2025 — National All-Terrain Vehicle Challenge</a></h3>
-            <p>IIT Bhilai Motorsports successfully designed, fabricated, and qualified their custom all-terrain vehicle (ATV) through virtual design presentations, static technical inspections, and dynamic endurance rounds.</p>
-            <time datetime="2025-01-28">January 28, 2025</time>
-            <p><a href="https://www.bajasaeindia.org/" target="_blank" rel="noopener noreferrer">Read Competition Portal &rarr;</a></p>
-          </div>
-        </article>
-
-        <article>
-          <a href="https://summerofcode.withgoogle.com/" target="_blank" rel="noopener noreferrer">
-            <img src="./../assets/logos/openlake.svg" alt="Google Summer of Code Selections" height="48" style="height: 48px; width: auto;">
-          </a>
-          <div>
-            <h3><a href="https://summerofcode.withgoogle.com/" target="_blank" rel="noopener noreferrer">Google Summer of Code (GSoC) &amp; LFX Mentorship Selections</a></h3>
-            <p>Students from IIT Bhilai mentored through OpenLake were selected for prestigious global developer programs, contributing to prominent open-source organizations such as AOSSIE and Open Robotics.</p>
-            <time datetime="2024-11-20">November 20, 2024</time>
-            <p><a href="https://summerofcode.withgoogle.com/" target="_blank" rel="noopener noreferrer">View GSoC Program &rarr;</a></p>
-          </div>
-        </article>
-
-        <article>
-          <a href="https://codepeak.tech/" target="_blank" rel="noopener noreferrer">
-            <img src="./../assets/logos/openlake.svg" alt="CodePeak Open Source Program" height="48" style="height: 48px; width: auto;">
-          </a>
-          <div>
-            <h3><a href="https://codepeak.tech/" target="_blank" rel="noopener noreferrer">CodePeak 2024: 1,000+ Student Developers Nationwide</a></h3>
-            <p>OpenLake successfully conducted CodePeak 2024, a month-long open-source festival welcoming students across India to contribute to real-world codebases and build open-source tools.</p>
-            <time datetime="2024-12-30">December 30, 2024</time>
-            <p><a href="https://codepeak.tech/" target="_blank" rel="noopener noreferrer">Visit CodePeak Official Site &rarr;</a></p>
-          </div>
-        </article>
-
-        <article>
-          <a href="https://www.sih.gov.in/" target="_blank" rel="noopener noreferrer">
-            <img src="./../assets/logos/iitbh-logo.jpg" alt="Smart India Hackathon Finalists" height="48" style="height: 48px; width: auto;">
-          </a>
-          <div>
-            <h3><a href="https://www.sih.gov.in/" target="_blank" rel="noopener noreferrer">Smart India Hackathon (SIH) — Grand Finale Accolades</a></h3>
-            <p>IIT Bhilai student innovator teams earned top rankings and accolades in national SIH grand finales for developing robust technological solutions for government and industry problem statements.</p>
-            <time datetime="2024-09-15">September 15, 2024</time>
-            <p><a href="https://www.sih.gov.in/" target="_blank" rel="noopener noreferrer">View Official SIH Portal &rarr;</a></p>
-          </div>
-        </article>
-
-        <article>
-          <a href="https://interiit-techmeet.com/" target="_blank" rel="noopener noreferrer">
-            <img src="./../assets/logos/sports.svg" alt="Inter-IIT Tech Meet Contingent" height="48" style="height: 48px; width: auto;">
-          </a>
-          <div>
-            <h3><a href="https://interiit-techmeet.com/" target="_blank" rel="noopener noreferrer">Inter-IIT Tech Meet &amp; Sports Contingent Excellence</a></h3>
-            <p>The student contingent represented IIT Bhilai with distinction across high-difficulty software engineering, data science, and autonomous robotics problem statements at the annual Inter-IIT meets.</p>
-            <time datetime="2024-12-22">December 22, 2024</time>
-            <p><a href="https://interiit-techmeet.com/" target="_blank" rel="noopener noreferrer">Visit Inter-IIT Tech Portal &rarr;</a></p>
-          </div>
-        </article>
-      </div>
-
-      <div>
-        <a href="./../Anouncements/announcements.html">View All Achievements</a>
       </div>
     </section>
 
-    <!-- Latest Hall of Fame Section -->
-    <section id="hall-of-fame">
-      <h2>Inter IIT Tech Meet & National Honours</h2>
+    <section class="section" id="communities">
+      <div class="wrap">
+        <div class="section-head">
+          <div><span class="eyebrow">Find your corner</span>
+            <h2>Explore student communities.</h2>
+          </div>
+          <p class="section-intro">Different interests, shared campus. Browse the existing directories to find clubs,
+            societies, and student groups to explore.</p>
+        </div>
+        <div class="community-grid">
+          <a class="community-card" href="../Tech%20Clubs/tech_clubs.html">
+            <span class="card-index">01 — EXPLORE & BUILD</span>
+            <h3>Science &amp; Technology</h3>
+            <p>Explore communities around software, electronics, design, cybersecurity, space, and hands-on technical
+              interests.</p>
+            <span class="card-arrow">Browse tech clubs <span aria-hidden="true">↗</span></span>
+          </a>
+          <a class="community-card" href="../Cultural%20Clubs/cult_clubs.html">
+            <span class="card-index">02 — CREATE & EXPRESS</span>
+            <h3>Cultural clubs</h3>
+            <p>Discover spaces for music, dance, theatre, visual arts, photography, design, film, literature, and
+              quizzing.</p>
+            <span class="card-arrow">Browse cultural clubs <span aria-hidden="true">↗</span></span>
+          </a>
+          <a class="community-card" href="../Societies/soc.html">
+            <span class="card-index">03 — CONNECT & CONTRIBUTE</span>
+            <h3>Societies &amp; campus life</h3>
+            <p>Find student groups and initiatives connected with mentorship, sports, welfare, and community
+              participation.</p>
+            <span class="card-arrow">Explore societies <span aria-hidden="true">↗</span></span>
+          </a>
+        </div>
+      </div>
+    </section>
 
-      <div>
-        <!-- Inter IIT Details -->
-        <div>
-          <div>
-            <div>
-              <h3>IIT Bhilai Technical Contingent</h3>
-              <p>Excellence in Pan-IIT Problem Statements & Innovation</p>
+    <section class="section tinted" id="featured">
+      <div class="wrap">
+        <div class="section-head">
+          <div><span class="eyebrow">A few starting points</span>
+            <h2>Meet the communities.</h2>
+          </div>
+          <p class="section-intro">A small selection from the student community landscape documented by IIT Bhilai.
+            Visit the directories for the broader picture.</p>
+        </div>
+        <div class="featured-grid">
+          <article class="feature-card">
+            <div class="logo-tile"><img src="../assets/logos/ingenuity.svg" alt="" width="52" height="52"
+                loading="lazy"></div>
+            <h3>Ingenuity</h3>
+            <p>Competitive programming and algorithmic problem solving.</p><span class="tag">Science &amp;
+              technology</span>
+          </article>
+          <article class="feature-card">
+            <div class="logo-tile"><img src="../assets/logos/openlake.svg" alt="" width="52" height="52" loading="lazy">
             </div>
-          </div>
-
-          <!-- Highlights -->
-          <div>
-            <div>
-              <h3>1st</h3>
-              <p>Union Bank National Hackathon</p>
+            <h3>OpenLake</h3>
+            <p>Open-source software and collaborative development.</p><span class="tag">Science &amp;
+              technology</span>
+          </article>
+          <article class="feature-card">
+            <div class="logo-tile"><img src="../assets/logos/beathackers.svg" alt="" width="52" height="52" loading="lazy">
             </div>
-            <div>
-              <h3>1000+</h3>
-              <p>Participants in CodePeak</p>
+            <h3>Beat Hackers</h3>
+            <p>Dance society exploring hip-hop, contemporary, and stage performance.</p><span class="tag">Cultural council</span>
+          </article>
+          <article class="feature-card">
+            <div class="logo-tile"><img src="../assets/logos/swara.svg" alt="" width="52" height="52" loading="lazy">
             </div>
-            <div>
-              <h3>Top Tier</h3>
-              <p>BAJA SAEINDIA ATV Qualifications</p>
-            </div>
-          </div>
+            <h3>Swara</h3>
+            <p>A student space for music, performance, and creative practice.</p><span class="tag">Cultural
+              council</span>
+          </article>
         </div>
-
-        <!-- Summary & Problem Statements -->
-        <div>
-          <p>
-            Heartiest congratulations to all student innovators, club leads, and contingent members of IIT Bhilai
-            for their stellar achievements in national competitions and the Inter-IIT meets! Their dedication reflects
-            the growing technical prowess and collaborative spirit of our institute.
-          </p>
-
-          <!-- Problem Statements Table -->
-          <table>
-            <thead>
-              <tr>
-                <th scope="col">Domain / Event</th>
-                <th scope="col">Result / Honor</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Union Bank IDEA 2.0 Hackathon (Cybersecurity & AI)</td>
-                <td>1st Prize (Winner)</td>
-              </tr>
-              <tr>
-                <td>Google Summer of Code (GSoC) Global Selections</td>
-                <td>Multiple Developer Selections</td>
-              </tr>
-              <tr>
-                <td>BAJA SAEINDIA Off-Road ATV Design & Virtuals</td>
-                <td>Qualified Finalist</td>
-              </tr>
-              <tr>
-                <td>CodePeak Month-long Open Source Program</td>
-                <td>Flagship Pan-India Success</td>
-              </tr>
-              <tr>
-                <td>Smart India Hackathon (Ministry Problem Statements)</td>
-                <td>Nodal Centre Winner & Finalists</td>
-              </tr>
-              <tr>
-                <td>Inter-IIT Tech Meet Software & Analytics Tracks</td>
-                <td>Competitive Point Finishes</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <div>
-        <a href="./../Anouncements/announcements.html">View Full Hall of Fame</a>
+        <div style="margin-top:26px"><a class="text-link" href="../Tech%20Clubs/tech_clubs.html">Explore the full
+            community directory ↗</a></div>
       </div>
     </section>
 
-    <!-- Work Report Section -->
-    <section id="work-reports">
-      <h2>Work Report</h2>
+    <section class="section" id="campus-events">
+      <div class="wrap">
+        <div class="section-head">
+          <div><span class="eyebrow">Across the campus calendar</span>
+            <h2>There is always something to be part of.</h2>
+          </div>
+          <p class="section-intro">Rather than listing dates that may have passed, discover recurring student events
+            documented by IIT Bhilai.</p>
+        </div>
+        <div class="event-grid">
+          <article class="event-card primary-event">
+            <span class="event-kicker">Sports · Annual tournament</span>
+            <h3>Prayatna</h3>
+            <p>IIT Bhilai’s annual sports tournament brings students together across indoor and outdoor games. The
+              2025–26 institute brochure describes it as a two-month-long event.</p>
+            <div class="event-bottom"><a class="text-link" href="https://polaris.iitbhilai.ac.in/views/cosa.php"
+                target="_blank" rel="noopener noreferrer">Discover campus events ↗</a></div>
+          </article>
+          <article class="event-card">
+            <span class="event-kicker">Culture · Student championship</span>
+            <h3>Anveshan</h3>
+            <p>An intra-institute cultural championship featuring activities across music, dance, drama, fine arts,
+              photography, literature, and quizzes.</p>
+            <div class="event-bottom"><a class="text-link" href="../Cultural%20Clubs/cult_clubs.html">Explore cultural
+                clubs ↗</a></div>
+          </article>
+        </div>
+      </div>
+    </section>
 
-      <div>
-        <article>
-          <a href="https://www.iitbhilai.ac.in/index.php?pid=annual_report" target="_blank" rel="noopener noreferrer">
-            <img src="./../assets/logos/report-cover-2022-23.svg" alt="CoSA Annual Work Report 2022-23 Cover Preview" width="160" height="226" style="width: 160px; height: 226px; object-fit: cover; border-radius: 6px; box-shadow: 0 4px 12px rgba(0,0,0,0.18);">
-            <h3>CoSA Annual Work Report 2022-23</h3>
-          </a>
-        </article>
-
-        <article>
-          <a href="https://www.iitbhilai.ac.in/index.php?pid=annual_report" target="_blank" rel="noopener noreferrer">
-            <img src="./../assets/logos/report-cover-2023-24.svg" alt="CoSA Annual Work Report 2023-24 Cover Preview" width="160" height="226" style="width: 160px; height: 226px; object-fit: cover; border-radius: 6px; box-shadow: 0 4px 12px rgba(0,0,0,0.18);">
-            <h3>CoSA Annual Work Report 2023-24</h3>
-          </a>
-        </article>
-
-        <article>
-          <a href="https://www.iitbhilai.ac.in/index.php?pid=annual_report" target="_blank" rel="noopener noreferrer">
-            <img src="./../assets/logos/report-cover-2024-25.svg" alt="CoSA Mid Term Report 2024-25 Cover Preview" width="160" height="226" style="width: 160px; height: 226px; object-fit: cover; border-radius: 6px; box-shadow: 0 4px 12px rgba(0,0,0,0.18);">
-            <h3>CoSA Mid Term Report 2024-25</h3>
-          </a>
-        </article>
+    <section class="section tinted">
+      <div class="wrap">
+        <div class="closing">
+          <h2>Your time here is more than a timetable. Find a community and get involved.</h2>
+          <a class="button" href="#communities">Start exploring <span aria-hidden="true">↗</span></a>
+        </div>
       </div>
     </section>
   </main>
 
-  <!-- Footer -->
-  <footer>
-    <address>
-      <!-- Social Links -->
-      <ul>
-        <li>
-          <a href="https://www.facebook.com/iitbhilai" target="_blank" rel="noopener noreferrer">
-            <img src="./../assets/logos/facebook.svg" alt="Facebook" width="20" height="20" style="vertical-align: middle; margin-right: 6px;" loading="lazy">
-            <span>Facebook</span>
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-top">
+        <div>
+          <a class="brand" href="index.html">
+            <img src="../assets/logos/cosa-crest.svg" alt="" width="40" height="40" loading="lazy">
+            <span><strong>Cluvora</strong><small>Student life · IIT Bhilai</small></span>
           </a>
-        </li>
-        <li>
-          <a href="https://www.instagram.com/iitbhilai" target="_blank" rel="noopener noreferrer">
-            <img src="./../assets/logos/instagram.svg" alt="Instagram" width="20" height="20" style="vertical-align: middle; margin-right: 6px;" loading="lazy">
-            <span>Instagram</span>
-          </a>
-        </li>
-        <li>
-          <a href="https://twitter.com/IITBhilai" target="_blank" rel="noopener noreferrer">
-            <img src="./../assets/logos/twitter.svg" alt="Twitter / X" width="20" height="20" style="vertical-align: middle; margin-right: 6px;" loading="lazy">
-            <span>Twitter / X</span>
-          </a>
-        </li>
-        <li>
-          <a href="https://linkedin.com/school/iitbhilai" target="_blank" rel="noopener noreferrer">
-            <img src="./../assets/logos/linkedin.svg" alt="LinkedIn" width="20" height="20" style="vertical-align: middle; margin-right: 6px;" loading="lazy">
-            <span>LinkedIn</span>
-          </a>
-        </li>
-        <li>
-          <a href="mailto:cosa@iitbhilai.ac.in">
-            <img src="./../assets/logos/mail.svg" alt="Email" width="20" height="20" style="vertical-align: middle; margin-right: 6px;" loading="lazy">
-            <span>cosa@iitbhilai.ac.in</span>
-          </a>
-        </li>
-      </ul>
-    </address>
-
-    <p>Council of Student Affairs (CoSA), Indian Institute of Technology Bhilai</p>
-    <p>Developed with ❤️ by Team RustyDevs</p>
+          <p class="footer-note">A student-community discovery experience for the Council of
+            Student Affairs, IIT Bhilai.</p>
+        </div>
+        <nav class="footer-links" aria-label="Footer navigation">
+          <a href="../Tech%20Clubs/tech_clubs.html">Tech clubs</a>
+          <a href="../Cultural%20Clubs/cult_clubs.html">Cultural clubs</a>
+          <a href="../Societies/soc.html">Societies</a>
+          <a href="../Anouncements/announcements.html">Announcements</a>
+          <a href="../Contact%20Us/contact_us.html">Contact</a>
+          <a href="https://polaris.iitbhilai.ac.in/views/cosa.php" target="_blank" rel="noopener noreferrer">Official
+            CoSA portal ↗</a>
+        </nav>
+      </div>
+      <div class="footer-bottom">
+        <span>© Council of Student Affairs · Indian Institute of Technology Bhilai</span>
+        <span>Built around student life.</span>
+      </div>
+    </div>
   </footer>
+
+  <script src="../js/data.js" defer></script>
+  <script src="../js/home.js" defer></script>
 </body>
+
 </html>
