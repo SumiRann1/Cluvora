@@ -9,7 +9,7 @@ BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 load_dotenv(os.path.join(BASE_DIR, '.env'))
 
 from rag import ask
-from auth import mock_auth, init_mock_db, verify_passcode
+from auth import coordinator_auth, init_auth_db, verify_passcode
 
 app = Flask(
     __name__,
@@ -17,7 +17,7 @@ app = Flask(
     static_folder=os.path.join(BASE_DIR, 'static'),
     static_url_path=''
 )
-app.register_blueprint(mock_auth)
+app.register_blueprint(coordinator_auth)
 
 DB_PATH = os.path.join(BASE_DIR, 'announcements.db')
 
@@ -104,7 +104,7 @@ def init_db():
         conn.commit()
 
 init_db()
-init_mock_db()
+init_auth_db()
 
 def get_short_description(desc):
     if not desc:
@@ -164,7 +164,7 @@ def get_announcements_api():
         params.append(category)
 
     if club:
-        norm_club = re.sub(r'[^a-z0-9]', '', club.lower())
+        clean_club = re.sub(r'[^a-z0-9]', '', club.lower())
         conditions.append('''
             (
                 LOWER(club_name) LIKE ? 
@@ -173,7 +173,7 @@ def get_announcements_api():
                 OR ? LIKE '%' || REPLACE(REPLACE(LOWER(club_name), ' ', ''), '-', '') || '%'
             )
         ''')
-        params.extend([f'%{club.lower()}%', club.lower(), f'%{norm_club}%', norm_club])
+        params.extend([f'%{club.lower()}%', club.lower(), f'%{clean_club}%', clean_club])
         
     if search:
         conditions.append('(LOWER(title) LIKE ? OR LOWER(content) LIKE ? OR LOWER(club_name) LIKE ?)')
@@ -195,15 +195,15 @@ def get_announcements_api():
 
 @app.route('/announcements', methods=['POST'])
 def create_announcement_api():
-    data = request.get_json(silent=True) or {}
-    club_name = data.get('club_name', '').strip()
-    title = data.get('title', '').strip()
-    category = data.get('category', 'General').strip()
-    content = data.get('content', '').strip()
-    event_date = data.get('event_date', '').strip()
-    link = data.get('link', '').strip()
-    author_name = data.get('author_name', '').strip()
-    is_pinned = 1 if data.get('is_pinned') else 0
+    post_data = request.get_json(silent=True) or {}
+    club_name = post_data.get('club_name', '').strip()
+    title = post_data.get('title', '').strip()
+    category = post_data.get('category', 'General').strip()
+    content = post_data.get('content', '').strip()
+    event_date = post_data.get('event_date', '').strip()
+    link = post_data.get('link', '').strip()
+    author_name = post_data.get('author_name', '').strip()
+    is_pinned = 1 if post_data.get('is_pinned') else 0
     
     if not club_name or not title or not content or not author_name:
         return jsonify({
@@ -211,7 +211,7 @@ def create_announcement_api():
             "error": "Club name, title, announcement details, and author/role are required."
         }), 400
 
-    passcode = data.get('passcode', '').strip()
+    passcode = post_data.get('passcode', '').strip()
     if passcode and not verify_passcode(club_name, passcode):
         return jsonify({
             "success": False,
