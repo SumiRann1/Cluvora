@@ -13,7 +13,7 @@ from rag import ask
 app = Flask(
     __name__,
     template_folder=BASE_DIR,
-    static_folder=BASE_DIR,
+    static_folder=os.path.join(BASE_DIR, 'static'),
     static_url_path=''
 )
 
@@ -110,7 +110,7 @@ def get_short_description(desc):
     return first_sentence if len(first_sentence) <= 180 else desc[:137] + '...'
 
 def get_cosa_data():
-    json_path = os.path.join(BASE_DIR, 'iit_bhilai_cosa_data.json')
+    json_path = os.path.join(BASE_DIR, 'static', 'iit_bhilai_cosa_data.json')
     with open(json_path, 'r', encoding='utf-8') as f:
         return json.load(f)
 
@@ -118,30 +118,32 @@ DATA = get_cosa_data()
 
 @app.route('/')
 def home():
-    return render_template('Home/index.html', councils=DATA.get('councils', []), clubs=DATA.get('clubs', []))
+    return render_template('template/index.html', councils=DATA.get('councils', []), clubs=DATA.get('clubs', []))
 
 @app.route('/tech-clubs')
 def tech_clubs_page():
     tech = [c for c in DATA.get('clubs', []) if c.get('parent_council') == 'Sci-Tech Council']
     for club in tech:
         club['short_description'] = get_short_description(club.get('description', ''))
-    return render_template('Tech Clubs/tech_clubs.html', clubs=tech)
+    return render_template('template/tech_clubs.html', clubs=tech)
 
 @app.route('/cultural-clubs')
 def cultural_clubs_page():
     cult = [c for c in DATA.get('clubs', []) if c.get('parent_council') in ['Cultural Council', 'Media and Publication Body']]
     for club in cult:
         club['short_description'] = get_short_description(club.get('description', ''))
-    return render_template('Cultural Clubs/cult_clubs.html', clubs=cult)
+    return render_template('template/cult_clubs.html', clubs=cult)
 
 @app.route('/societies')
 def societies_page():
-    soc = [c for c in DATA.get('clubs', []) if 'Society' in c.get('name', '') or 'Society' in c.get('category', '')]
-    return render_template('Societies/soc.html', clubs=soc)
+    soc = [c for c in DATA.get('clubs', []) if 'Society' in c.get('name', '') or 'Society' in c.get('category', '') or c.get('parent_council') in ['Student Welfare and Governance', 'Sports Council']]
+    for club in soc:
+        club['short_description'] = get_short_description(club.get('description', ''))
+    return render_template('template/soc.html', clubs=soc)
 
 @app.route('/announcements')
 def announcements_page():
-    return render_template('Anouncements/announcements.html')
+    return render_template('template/announcements.html')
 
 @app.route('/api/announcements', methods=['GET'])
 def get_announcements_api():
@@ -223,21 +225,21 @@ def delete_announcement_api(announcement_id):
 
 @app.route('/contact')
 def contact_page():
-    return render_template('Contact Us/contact_us.html')
+    return render_template('template/contact_us.html')
 
 @app.route('/club/<club_id>/details')
 def get_club_details(club_id):
     club = next((c for c in DATA.get('clubs', []) if c.get('club_id') == club_id), None)
     if not club:
         return "<p class='loading-state'>Club details not found.</p>", 404
-    partial_path = os.path.join(BASE_DIR, 'Tech Clubs', 'club_details_partial.html')
+    partial_path = os.path.join(BASE_DIR, 'template', 'club_details_partial.html')
     if os.path.exists(partial_path):
-        return render_template('Tech Clubs/club_details_partial.html', club=club)
+        return render_template('template/club_details_partial.html', club=club)
     return jsonify(club)
 
 @app.route('/chatbot')
 def chatbot_page():
-    return render_template('Chatbot/chatbot.html')
+    return render_template('template/chatbot.html')
 
 @app.route('/chat', methods=['POST'])
 def chat_api():

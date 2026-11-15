@@ -85,7 +85,7 @@ function render_info_card(item) {
         ${web_url ? `<a href="${web_url}" target="_blank" rel="noopener noreferrer" class="btn-primary">Official Portal &rarr;</a>` : ''}
         ${item.social_links?.github ? `<a href="${item.social_links.github}" target="_blank" rel="noopener noreferrer" class="btn-secondary">GitHub</a>` : ''}
         ${item.social_links?.linkedin ? `<a href="${item.social_links.linkedin}" target="_blank" rel="noopener noreferrer" class="btn-secondary">LinkedIn</a>` : ''}
-        ${item.category === "Science & Technology" && item.club_id ? `<a href="./../Tech Clubs/tech_clubs.html#${item.club_id}" class="btn-secondary">Detailed Tech Card &rarr;</a>` : ''}
+        ${item.category === "Science & Technology" && item.club_id ? `<a href="/tech-clubs#${item.club_id}" class="btn-secondary">Detailed Tech Card &rarr;</a>` : ''}
       </div>
     </div>
   `;

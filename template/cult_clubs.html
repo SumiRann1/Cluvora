@@ -6,10 +6,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#f7f5fa">
   <meta name="description"
-    content="Explore Science and Technology Council clubs and student-led technical communities at IIT Bhilai.">
-  <link rel="icon" type="image/svg+xml" href="../assets/logos/cosa-crest.svg">
-  <link rel="stylesheet" href="../style/global.css">
-  <link rel="stylesheet" href="../style/cult_clubs.css">
+    content="Explore Cultural Council clubs and creative student communities at IIT Bhilai.">
+  <link rel="icon" type="image/svg+xml" href="/assets/logos/cosa-crest.svg">
+  <link rel="stylesheet" href="/css/global.css">
+  <link rel="stylesheet" href="/css/cult_clubs.css">
   <title>Cultural Clubs | Cluvora — IIT Bhilai</title>
   <script>
     const saved_theme = localStorage.getItem("theme");
@@ -21,19 +21,19 @@
 <body>
   <div class="wrap">
     <header class="topbar">
-      <a class="brand" href="../Home/index.html" aria-label="Cluvora home">
-        <img src="../assets/logos/cosa-crest.svg" alt="Council of Student Affairs logo" width="44" height="44">
+      <a class="brand" href="/" aria-label="Cluvora home">
+        <img src="/assets/logos/cosa-crest.svg" alt="Council of Student Affairs logo" width="44" height="44">
         <span><strong>Cluvora</strong><small>Student life · IIT Bhilai</small></span>
       </a>
       <div class="nav-area">
         <nav class="main-nav" aria-label="Main navigation">
-          <a href="../Home/index.html">Home</a>
-          <a href="../Tech Clubs/tech_clubs.html">Tech clubs</a>
-          <a href="../Cultural%20Clubs/cult_clubs.html" aria-current="page">Cultural clubs</a>
-          <a href="../Societies/soc.html">Societies</a>
-          <a href="../Anouncements/announcements.html">Announcements</a>
-          <a href="../Contact%20Us/contact_us.html">Contact</a>
-          <a href="../Chatbot/chatbot.html">AI Assistant</a>
+          <a href="/">Home</a>
+          <a href="/tech-clubs">Tech clubs</a>
+          <a href="/cultural-clubs" aria-current="page">Cultural clubs</a>
+          <a href="/societies">Societies</a>
+          <a href="/announcements">Announcements</a>
+          <a href="/contact">Contact</a>
+          <a href="/chatbot">Campus Guide</a>
         </nav>
         <button class="theme-toggle" id="theme-toggle" type="button" aria-pressed="false"
           aria-label="Switch to dark theme">
@@ -86,19 +86,51 @@
       </div>
     </section>
 
-    <section class="club-grid" id="cult-list" aria-label="Science and Technology Council clubs">
-      <div id="loading-spinner" class="loading-state">
-        <span class="loading-spinner" aria-hidden="true"></span>
-        <p>Loading Cultural clubs...</p>
+    <!-- Search filter wrapper -->
+    <div id="search-filter-wrapper" class="search-wrapper wrap">
+      <div>
+        <input type="text" id="club-search-input" class="search-input" placeholder="Search cultural clubs by name, keywords, or domain..." />
       </div>
+    </div>
+
+    <section class="club-grid" id="cult-list" aria-label="Cultural Council clubs">
+      {% if clubs %}
+        {% for club in clubs %}
+        <article class="club-card" id="{{ club.club_id }}" tabindex="0" role="region" aria-label="{{ club.name }}">
+          <header class="club-header">
+            <a class="club-logo" href="{{ club.social_links.website or '#' }}" {% if club.social_links.website %}target="_blank" rel="noopener noreferrer"{% endif %} title="{{ club.name }}">
+              <img src="{{ club.logo_url or '/assets/logos/cosa-crest.svg' }}" alt="{{ club.name }} Logo" width="64" height="64" style="width: 64px; height: 64px; object-fit: contain;">
+            </a>
+            <div>
+              <h2 class="club-title">{{ club.name }}</h2>
+              {% if club.tagline %}<p class="club-tagline"><em>{{ club.tagline }}</em></p>{% endif %}
+            </div>
+          </header>
+
+          <p class="club-desc club-desc-preview">{{ club.short_description }}</p>
+
+          <div class="club-details-wrapper" id="details-{{ club.club_id }}">
+            <!-- Dynamically populated from Python route /club/{{ club.club_id }}/details -->
+          </div>
+
+          <button type="button" class="club-expand-btn" data-url="/club/{{ club.club_id }}/details" aria-expanded="false" aria-controls="details-{{ club.club_id }}">
+            <span class="expand-btn-text">View full details</span>
+            <span class="expand-arrow" aria-hidden="true">&darr;</span>
+          </button>
+        </article>
+        {% endfor %}
+      {% else %}
+        <div class="loading-state empty-state">
+          <h3>No cultural clubs found.</h3>
+        </div>
+      {% endif %}
     </section>
 
     <section class="section tinted closing-section">
       <div class="wrap">
         <div class="closing">
-          <h2>Have an idea worth building? Find the people who will build it with you.</h2>
-          <a class="button" href="../Contact%20Us/contact_us.html">Connect with CoSA <span
-              aria-hidden="true">↗</span></a>
+          <h2>Have a creative passion? Find the community that creates with you.</h2>
+          <a class="button" href="/contact">Connect with CoSA <span aria-hidden="true">↗</span></a>
         </div>
       </div>
     </section>
@@ -108,22 +140,20 @@
     <div class="wrap">
       <div class="footer-top">
         <div>
-          <a class="brand" href="../Home/index.html">
-            <img src="../assets/logos/cosa-crest.svg" alt="" width="40" height="40" loading="lazy">
+          <a class="brand" href="/">
+            <img src="/assets/logos/cosa-crest.svg" alt="" width="40" height="40" loading="lazy">
             <span><strong>Cluvora</strong><small>Student life · IIT Bhilai</small></span>
           </a>
-          <p class="footer-note">A student-community discovery experience for the Council of
-            Student Affairs, IIT Bhilai.</p>
+          <p class="footer-note">A student-community discovery experience for the Council of Student Affairs, IIT Bhilai.</p>
         </div>
         <nav class="footer-links" aria-label="Footer navigation">
-          <a href="tech_clubs.html">Tech clubs</a>
-          <a href="../Cultural%20Clubs/cult_clubs.html">Cultural clubs</a>
-          <a href="../Societies/soc.html">Societies</a>
-          <a href="../Anouncements/announcements.html">Announcements</a>
-          <a href="../Contact%20Us/contact_us.html">Contact</a>
-          <a href="../Chatbot/chatbot.html">AI Assistant</a>
-          <a href="https://polaris.iitbhilai.ac.in/views/cosa.php" target="_blank" rel="noopener noreferrer">Official
-            CoSA portal ↗</a>
+          <a href="/tech-clubs">Tech clubs</a>
+          <a href="/cultural-clubs">Cultural clubs</a>
+          <a href="/societies">Societies</a>
+          <a href="/announcements">Announcements</a>
+          <a href="/contact">Contact</a>
+          <a href="/chatbot">Campus Guide</a>
+          <a href="https://polaris.iitbhilai.ac.in/views/cosa.php" target="_blank" rel="noopener noreferrer">Official CoSA portal ↗</a>
         </nav>
       </div>
       <div class="footer-bottom">
@@ -133,8 +163,8 @@
     </div>
   </footer>
 
-  <script src="../js/data.js" defer></script>
-  <script src="../js/cult_clubs.js" defer></script>
+  <script src="/js/data.js" defer></script>
+  <script src="/js/cult_clubs.js" defer></script>
 </body>
 
 </html>
