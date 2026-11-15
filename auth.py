@@ -3,7 +3,7 @@ import re
 import sqlite3
 from flask import Blueprint, request, jsonify
 
-mock_auth = Blueprint('coordinator_auth', __name__)
+coordinator_auth = Blueprint('coordinator_auth', __name__)
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 DB_PATH = os.path.join(BASE_DIR, 'announcements.db')
 
@@ -12,10 +12,10 @@ def get_db():
     conn.row_factory = sqlite3.Row
     return conn
 
-def normalize(text):
+def clean_text(text):
     return re.sub(r'[^a-z0-9]', '', (text or '').lower())
 
-def init_mock_db():
+def init_auth_db():
     with get_db() as conn:
         cursor = conn.cursor()
         cursor.execute('''
@@ -27,7 +27,7 @@ def init_mock_db():
                 category TEXT DEFAULT 'General'
             )
         ''')
-        seed_data = [
+        default_passcodes = [
             ("openlake", "OpenLake", "openlake@2026", "Sci-Tech"),
             ("spectre", "Spectre", "spectre@2026", "Sci-Tech"),
             ("dsai", "DSAI", "dsai@2026", "Sci-Tech"),
@@ -60,29 +60,31 @@ def init_mock_db():
         cursor.executemany('''
             INSERT OR IGNORE INTO coordinator_passcodes (club_key, club_name, passcode, category)
             VALUES (?, ?, ?, ?)
-        ''', seed_data)
+        ''', default_passcodes)
         conn.commit()
 
+
 def get_club_category(club_name):
-    norm_club = normalize(club_name)
+    clean_club = clean_text(club_name)
     with get_db() as conn:
         cursor = conn.cursor()
         cursor.execute('SELECT club_key, club_name, category FROM coordinator_passcodes')
         rows = cursor.fetchall()
         for r in rows:
-            k = normalize(r['club_key'])
-            n = normalize(r['club_name'])
-            if norm_club in (k, n) or norm_club.startswith(k) or k in norm_club or n in norm_club:
+            key = clean_text(r['club_key'])
+            name = clean_text(r['club_name'])
+            if clean_club in (key, name) or clean_club.startswith(key) or key in clean_club or name in clean_club:
                 return r['category'] or 'General'
     return 'General'
+
 
 def verify_passcode(club_name, passcode):
     if not club_name or not passcode:
         return False
-    norm_club = normalize(club_name)
-    input_pass = passcode.strip()
+    clean_club = clean_text(club_name)
+    entered_passcode = passcode.strip()
 
-    if input_pass in ('cosa@admin2026', 'admin@2026', 'iitbhilai@2026'):
+    if entered_passcode in ('cosa@admin2026', 'admin@2026', 'iitbhilai@2026'):
         return True
 
     with get_db() as conn:
@@ -90,18 +92,19 @@ def verify_passcode(club_name, passcode):
         cursor.execute('SELECT club_key, club_name, passcode FROM coordinator_passcodes')
         rows = cursor.fetchall()
         for r in rows:
-            k = normalize(r['club_key'])
-            n = normalize(r['club_name'])
-            if norm_club in (k, n) or norm_club.startswith(k) or k in norm_club or n in norm_club:
-                if r['passcode'] == input_pass or input_pass == f"{k}@2026" or input_pass == f"{k}123":
+            key = clean_text(r['club_key'])
+            name = clean_text(r['club_name'])
+            if clean_club in (key, name) or clean_club.startswith(key) or key in clean_club or name in clean_club:
+                if r['passcode'] == entered_passcode or entered_passcode == f"{key}@2026" or entered_passcode == f"{key}123":
                     return True
     return False
 
-@mock_auth.route('/verify-coordinator', methods=['POST'])
+
+@coordinator_auth.route('/verify-coordinator', methods=['POST'])
 def verify_coordinator_api():
-    data = request.get_json(silent=True) or {}
-    club_name = data.get('club_name', '').strip()
-    passcode = data.get('passcode', '').strip()
+    post_data = request.get_json(silent=True) or {}
+    club_name = post_data.get('club_name', '').strip()
+    passcode = post_data.get('passcode', '').strip()
 
     if not club_name:
         return jsonify({"success": False, "error": "Please select a club or society."}), 400
@@ -122,7 +125,8 @@ def verify_coordinator_api():
             "error": f"Incorrect passcode for {club_name}. Please try again."
         }), 401
 
-@mock_auth.route('/coordinator-clubs', methods=['GET'])
+
+@coordinator_auth.route('/coordinator-clubs', methods=['GET'])
 def get_coordinator_clubs_api():
     with get_db() as conn:
         cursor = conn.cursor()

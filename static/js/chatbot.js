@@ -1,11 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const messagesContainer = document.getElementById('chat-messages');
-  const chatForm = document.getElementById('chat-form');
-  const chatInput = document.getElementById('chat-input');
-  const sendBtn = document.getElementById('chat-send');
-  const clearBtn = document.getElementById('clear-chat-btn');
+  const messages_box = document.getElementById('chat-messages');
+  const chat_form = document.getElementById('chat-form');
+  const chat_input = document.getElementById('chat-input');
+  const send_btn = document.getElementById('chat-send');
+  const clear_btn = document.getElementById('clear-chat-btn');
 
-  function escapeHtml(str) {
+  function escape_html(str) {
     if (!str) return '';
     return String(str)
       .replace(/&/g, '&amp;')
@@ -15,40 +15,40 @@ document.addEventListener('DOMContentLoaded', () => {
       .replace(/'/g, '&#039;');
   }
 
-  function formatMarkdown(text) {
+  function format_markdown(text) {
     if (!text) return '';
     let html = text.replace(/`([^`]+)`/g, '<code>$1</code>');
     html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
     html = html.replace(/\*([^*]+)\*/g, '<em>$1</em>');
 
     const lines = html.split('\n');
-    let inList = false;
+    let in_list = false;
     const processed = [];
 
     for (let line of lines) {
       const trimmed = line.trim();
       if (trimmed.startsWith('- ') || trimmed.startsWith('• ') || (trimmed.startsWith('* ') && !trimmed.endsWith('*'))) {
-        if (!inList) {
+        if (!in_list) {
           processed.push('<ul>');
-          inList = true;
+          in_list = true;
         }
         processed.push(`<li>${trimmed.substring(2)}</li>`);
       } else {
-        if (inList) {
+        if (in_list) {
           processed.push('</ul>');
-          inList = false;
+          in_list = false;
         }
         processed.push(line);
       }
     }
-    if (inList) processed.push('</ul>');
+    if (in_list) processed.push('</ul>');
 
     return processed.join('\n')
       .replace(/\n\n+/g, '<br><br>')
       .replace(/\n/g, '<br>');
   }
 
-  function appendMessage(sender, text, sources = []) {
+  function append_message(sender, text, sources = []) {
     const row = document.createElement('div');
     row.className = `message-row ${sender}`;
 
@@ -62,32 +62,32 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const bubble = document.createElement('div');
     bubble.className = 'chat-bubble';
-    bubble.innerHTML = formatMarkdown(text);
+    bubble.innerHTML = format_markdown(text);
 
     if (sources && sources.length > 0) {
-      const sourcesDiv = document.createElement('div');
-      sourcesDiv.className = 'sources-container';
-      sourcesDiv.innerHTML = `
+      const sources_wrap = document.createElement('div');
+      sources_wrap.className = 'sources-container';
+      sources_wrap.innerHTML = `
         <div class="sources-heading">Brochure references:</div>
         <div class="sources-list">
           ${sources.map(s => `
-            <span class="source-pill" title="${escapeHtml(s.title || 'Page ' + s.page)}">
+            <span class="source-pill" title="${escape_html(s.title || 'Page ' + s.page)}">
               Page ${s.page}
             </span>
           `).join('')}
         </div>
       `;
-      bubble.appendChild(sourcesDiv);
+      bubble.appendChild(sources_wrap);
     }
 
     row.appendChild(avatar);
     row.appendChild(bubble);
-    messagesContainer.appendChild(row);
-    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    messages_box.appendChild(row);
+    messages_box.scrollTop = messages_box.scrollHeight;
     return row;
   }
 
-  function showTypingIndicator() {
+  function show_typing_indicator() {
     const row = document.createElement('div');
     row.className = 'typing-row';
     row.id = 'typing-indicator';
@@ -100,70 +100,70 @@ document.addEventListener('DOMContentLoaded', () => {
         <span class="typing-label">Checking handbook...</span>
       </div>
     `;
-    messagesContainer.appendChild(row);
-    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    messages_box.appendChild(row);
+    messages_box.scrollTop = messages_box.scrollHeight;
   }
 
-  function removeTypingIndicator() {
+  function remove_typing_indicator() {
     const indicator = document.getElementById('typing-indicator');
     if (indicator) indicator.remove();
   }
 
-  async function handleSend(query) {
-    const userText = query.trim();
-    if (!userText) return;
+  async function handle_send(query) {
+    const user_query = query.trim();
+    if (!user_query) return;
 
-    appendMessage('user', userText);
-    chatInput.value = '';
-    chatInput.disabled = true;
-    sendBtn.disabled = true;
+    append_message('user', user_query);
+    chat_input.value = '';
+    chat_input.disabled = true;
+    send_btn.disabled = true;
 
-    showTypingIndicator();
+    show_typing_indicator();
 
     try {
       const response = await fetch('/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: userText })
+        body: JSON.stringify({ message: user_query })
       });
 
-      removeTypingIndicator();
+      remove_typing_indicator();
 
       if (!response.ok) {
         throw new Error(`Server returned error ${response.status}`);
       }
 
-      const data = await response.json();
-      appendMessage('bot', data.reply || 'No response returned.', data.sources || []);
+      const res_data = await response.json();
+      append_message('bot', res_data.reply || 'No response returned.', res_data.sources || []);
 
     } catch (err) {
-      removeTypingIndicator();
+      remove_typing_indicator();
       console.error(err);
-      appendMessage('bot', '⚠️ Sorry, there was an issue processing your question. Please ensure the Flask server is running.');
+      append_message('bot', '⚠️ Sorry, there was an issue processing your question. Please ensure the Flask server is running.');
     } finally {
-      chatInput.disabled = false;
-      sendBtn.disabled = false;
-      chatInput.focus();
+      chat_input.disabled = false;
+      send_btn.disabled = false;
+      chat_input.focus();
     }
   }
 
-  chatForm.addEventListener('submit', (e) => {
+  chat_form.addEventListener('submit', (e) => {
     e.preventDefault();
-    handleSend(chatInput.value);
+    handle_send(chat_input.value);
   });
 
   document.querySelectorAll('.chip-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       const query = btn.getAttribute('data-query');
       if (query) {
-        handleSend(query);
+        handle_send(query);
       }
     });
   });
 
-  if (clearBtn) {
-    clearBtn.addEventListener('click', () => {
-      messagesContainer.innerHTML = `
+  if (clear_btn) {
+    clear_btn.addEventListener('click', () => {
+      messages_box.innerHTML = `
         <div class="message-row bot">
           <div class="msg-avatar bot">
             <img src="/assets/logos/cosa-crest.svg" alt="CoSA Crest" width="20" height="20" style="vertical-align: middle;">

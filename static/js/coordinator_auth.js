@@ -1,192 +1,192 @@
-let verifiedClub = '';
-let verifiedPasscode = '';
+let verified_club = '';
+let verified_passcode = '';
 
-function initCoordinatorAuth() {
-  const clubSelect = document.getElementById('club-select');
-  const customClubWrap = document.getElementById('custom-club-wrap');
-  const customClubInput = document.getElementById('custom-club');
-  const passcodeWrap = document.getElementById('passcode-field-wrap');
-  const passcodeInput = document.getElementById('coordinator-passcode');
-  const togglePasscodeBtn = document.getElementById('toggle-passcode-btn');
-  const verifyBtn = document.getElementById('verify-passcode-btn');
-  const authFeedback = document.getElementById('auth-feedback');
-  const authStep = document.getElementById('coordinator-auth-step');
-  const postForm = document.getElementById('post-announcement-form');
-  const verifiedDisplay = document.getElementById('verified-club-display');
-  const changeClubBtn = document.getElementById('change-club-btn');
-  const hiddenPasscode = document.getElementById('verified-passcode-hidden');
+function init_coordinator_auth() {
+  const club_select = document.getElementById('club-select');
+  const custom_club_wrap = document.getElementById('custom-club-wrap');
+  const custom_club_input = document.getElementById('custom-club');
+  const passcode_wrap = document.getElementById('passcode-field-wrap');
+  const passcode_input = document.getElementById('coordinator-passcode');
+  const toggle_passcode_btn = document.getElementById('toggle-passcode-btn');
+  const verify_btn = document.getElementById('verify-passcode-btn');
+  const auth_feedback = document.getElementById('auth-feedback');
+  const auth_step = document.getElementById('coordinator-auth-step');
+  const post_form = document.getElementById('post-announcement-form');
+  const verified_display = document.getElementById('verified-club-display');
+  const change_club_btn = document.getElementById('change-club-btn');
+  const hidden_passcode = document.getElementById('verified-passcode-hidden');
 
-  if (!clubSelect || !authStep || !postForm) return;
+  if (!club_select || !auth_step || !post_form) return;
 
-  function resetAuthModal() {
-    verifiedClub = '';
-    verifiedPasscode = '';
-    if (hiddenPasscode) hiddenPasscode.value = '';
-    if (passcodeInput) passcodeInput.value = '';
-    if (authFeedback) {
-      authFeedback.style.display = 'none';
-      authFeedback.textContent = '';
-      authFeedback.className = 'form-feedback';
+  function reset_auth_modal() {
+    verified_club = '';
+    verified_passcode = '';
+    if (hidden_passcode) hidden_passcode.value = '';
+    if (passcode_input) passcode_input.value = '';
+    if (auth_feedback) {
+      auth_feedback.style.display = 'none';
+      auth_feedback.textContent = '';
+      auth_feedback.className = 'form-feedback';
     }
-    if (passcodeWrap) passcodeWrap.style.display = 'none';
-    if (customClubWrap) customClubWrap.style.display = 'none';
-    authStep.style.display = 'flex';
-    postForm.style.display = 'none';
-    if (clubSelect) clubSelect.value = '';
-    if (customClubInput) customClubInput.value = '';
+    if (passcode_wrap) passcode_wrap.style.display = 'none';
+    if (custom_club_wrap) custom_club_wrap.style.display = 'none';
+    auth_step.style.display = 'flex';
+    post_form.style.display = 'none';
+    if (club_select) club_select.value = '';
+    if (custom_club_input) custom_club_input.value = '';
   }
 
-  window.resetCoordinatorAuth = resetAuthModal;
+  window.reset_coordinator_auth = reset_auth_modal;
 
-  const openBtns = document.querySelectorAll('[data-open-modal]');
-  openBtns.forEach(btn => btn.addEventListener('click', () => {
-    resetAuthModal();
+  const open_btns = document.querySelectorAll('[data-open-modal]');
+  open_btns.forEach(btn => btn.addEventListener('click', () => {
+    reset_auth_modal();
   }));
 
-  clubSelect.addEventListener('change', () => {
-    const val = clubSelect.value;
+  club_select.addEventListener('change', () => {
+    const val = club_select.value;
     if (val === 'custom') {
-      if (customClubWrap) {
-        customClubWrap.style.display = 'block';
-        if (customClubInput) customClubInput.focus();
+      if (custom_club_wrap) {
+        custom_club_wrap.style.display = 'block';
+        if (custom_club_input) custom_club_input.focus();
       }
-      if (passcodeWrap) passcodeWrap.style.display = 'block';
+      if (passcode_wrap) passcode_wrap.style.display = 'block';
     } else if (val) {
-      if (customClubWrap) customClubWrap.style.display = 'none';
-      if (passcodeWrap) {
-        passcodeWrap.style.display = 'block';
-        if (passcodeInput) passcodeInput.focus();
+      if (custom_club_wrap) custom_club_wrap.style.display = 'none';
+      if (passcode_wrap) {
+        passcode_wrap.style.display = 'block';
+        if (passcode_input) passcode_input.focus();
       }
     } else {
-      if (passcodeWrap) passcodeWrap.style.display = 'none';
+      if (passcode_wrap) passcode_wrap.style.display = 'none';
     }
-    if (authFeedback) authFeedback.style.display = 'none';
+    if (auth_feedback) auth_feedback.style.display = 'none';
   });
 
-  if (customClubInput) {
-    customClubInput.addEventListener('input', () => {
-      if (customClubInput.value.trim() && passcodeWrap) {
-        passcodeWrap.style.display = 'block';
+  if (custom_club_input) {
+    custom_club_input.addEventListener('input', () => {
+      if (custom_club_input.value.trim() && passcode_wrap) {
+        passcode_wrap.style.display = 'block';
       }
     });
   }
 
-  if (togglePasscodeBtn && passcodeInput) {
-    togglePasscodeBtn.addEventListener('click', () => {
-      const isPwd = passcodeInput.type === 'password';
-      passcodeInput.type = isPwd ? 'text' : 'password';
-      togglePasscodeBtn.textContent = isPwd ? 'Hide' : 'Show';
+  if (toggle_passcode_btn && passcode_input) {
+    toggle_passcode_btn.addEventListener('click', () => {
+      const is_pwd = passcode_input.type === 'password';
+      passcode_input.type = is_pwd ? 'text' : 'password';
+      toggle_passcode_btn.textContent = is_pwd ? 'Hide' : 'Show';
     });
   }
 
-  async function performVerification() {
-    const customVal = customClubInput ? customClubInput.value.trim() : '';
-    const selectedVal = clubSelect.value;
-    const targetClub = (selectedVal === 'custom' ? customVal : selectedVal) || customVal;
-    const passcode = passcodeInput ? passcodeInput.value.trim() : '';
+  async function perform_verification() {
+    const custom_val = custom_club_input ? custom_club_input.value.trim() : '';
+    const selected_val = club_select.value;
+    const target_club = (selected_val === 'custom' ? custom_val : selected_val) || custom_val;
+    const passcode = passcode_input ? passcode_input.value.trim() : '';
 
-    if (!targetClub) {
-      showFeedback('Please select or specify a club or society.', 'error');
+    if (!target_club) {
+      show_feedback('Please select or specify a club or society.', 'error');
       return;
     }
 
     if (!passcode) {
-      showFeedback('Please enter the coordinator passcode.', 'error');
-      if (passcodeInput) passcodeInput.focus();
+      show_feedback('Please enter the coordinator passcode.', 'error');
+      if (passcode_input) passcode_input.focus();
       return;
     }
 
-    if (verifyBtn) {
-      verifyBtn.disabled = true;
-      verifyBtn.textContent = 'Verifying...';
+    if (verify_btn) {
+      verify_btn.disabled = true;
+      verify_btn.textContent = 'Verifying...';
     }
 
     try {
-      const res = await fetch('/verify-coordinator', {
+      const resp = await fetch('/verify-coordinator', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          club_name: targetClub,
+          club_name: target_club,
           passcode: passcode
         })
       });
 
-      const data = await res.json();
+      const data = await resp.json();
 
-      if (!res.ok || !data.success) {
-        showFeedback(data.error || 'Incorrect passcode. Please try again.', 'error');
-        if (verifyBtn) {
-          verifyBtn.disabled = false;
-          verifyBtn.textContent = 'Verify Passcode →';
+      if (!resp.ok || !data.success) {
+        show_feedback(data.error || 'Incorrect passcode. Please try again.', 'error');
+        if (verify_btn) {
+          verify_btn.disabled = false;
+          verify_btn.textContent = 'Verify Passcode →';
         }
         return;
       }
 
-      verifiedClub = targetClub;
-      verifiedPasscode = passcode;
-      if (hiddenPasscode) hiddenPasscode.value = passcode;
+      verified_club = target_club;
+      verified_passcode = passcode;
+      if (hidden_passcode) hidden_passcode.value = passcode;
 
-      showFeedback('Passcode verified successfully!', 'success');
+      show_feedback('Passcode verified successfully!', 'success');
 
       setTimeout(() => {
-        authStep.style.display = 'none';
-        postForm.style.display = 'flex';
-        if (verifiedDisplay) verifiedDisplay.textContent = verifiedClub;
+        auth_step.style.display = 'none';
+        post_form.style.display = 'flex';
+        if (verified_display) verified_display.textContent = verified_club;
         if (data.category) {
-          const catSelect = document.getElementById('announcement-category-select');
-          if (catSelect) {
-            const hasOption = Array.from(catSelect.options).some(o => o.value === data.category);
-            if (hasOption) catSelect.value = data.category;
+          const cat_select = document.getElementById('announcement-category-select');
+          if (cat_select) {
+            const has_opt = Array.from(cat_select.options).some(o => o.value === data.category);
+            if (has_opt) cat_select.value = data.category;
           }
         }
-        const titleInput = document.getElementById('announcement-title-input');
-        if (titleInput) titleInput.focus();
+        const title_input = document.getElementById('announcement-title-input');
+        if (title_input) title_input.focus();
       }, 400);
 
     } catch (err) {
-      showFeedback('Failed to connect to verification service.', 'error');
+      show_feedback('Failed to connect to verification service.', 'error');
     } finally {
-      if (verifyBtn) {
-        verifyBtn.disabled = false;
-        verifyBtn.textContent = 'Verify Passcode →';
+      if (verify_btn) {
+        verify_btn.disabled = false;
+        verify_btn.textContent = 'Verify Passcode →';
       }
     }
   }
 
-  function showFeedback(msg, type) {
-    if (!authFeedback) return;
-    authFeedback.textContent = msg;
-    authFeedback.className = 'form-feedback ' + type;
-    authFeedback.style.display = 'block';
+  function show_feedback(msg, type) {
+    if (!auth_feedback) return;
+    auth_feedback.textContent = msg;
+    auth_feedback.className = 'form-feedback ' + type;
+    auth_feedback.style.display = 'block';
   }
 
-  if (verifyBtn) {
-    verifyBtn.addEventListener('click', performVerification);
+  if (verify_btn) {
+    verify_btn.addEventListener('click', perform_verification);
   }
 
-  if (passcodeInput) {
-    passcodeInput.addEventListener('keydown', (e) => {
+  if (passcode_input) {
+    passcode_input.addEventListener('keydown', (e) => {
       if (e.key === 'Enter') {
         e.preventDefault();
-        performVerification();
+        perform_verification();
       }
     });
   }
 
-  if (changeClubBtn) {
-    changeClubBtn.addEventListener('click', () => {
-      verifiedClub = '';
-      verifiedPasscode = '';
-      if (hiddenPasscode) hiddenPasscode.value = '';
-      authStep.style.display = 'flex';
-      postForm.style.display = 'none';
-      if (passcodeInput) {
-        passcodeInput.value = '';
-        passcodeInput.focus();
+  if (change_club_btn) {
+    change_club_btn.addEventListener('click', () => {
+      verified_club = '';
+      verified_passcode = '';
+      if (hidden_passcode) hidden_passcode.value = '';
+      auth_step.style.display = 'flex';
+      post_form.style.display = 'none';
+      if (passcode_input) {
+        passcode_input.value = '';
+        passcode_input.focus();
       }
-      if (authFeedback) authFeedback.style.display = 'none';
+      if (auth_feedback) auth_feedback.style.display = 'none';
     });
   }
 }
 
-document.addEventListener('DOMContentLoaded', initCoordinatorAuth);
+document.addEventListener('DOMContentLoaded', init_coordinator_auth);
