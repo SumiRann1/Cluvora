@@ -125,7 +125,7 @@ def tech_clubs_page():
     tech = [c for c in DATA.get('clubs', []) if c.get('parent_council') == 'Sci-Tech Council']
     for club in tech:
         club['short_description'] = get_short_description(club.get('description', ''))
-    return render_template('Tech Clubs/tech_clubs.html', clubs=tech)
+    return render_template('template/tech_clubs.html', clubs=tech)
 
 @app.route('/cultural-clubs')
 def cultural_clubs_page():
@@ -232,9 +232,9 @@ def get_club_details(club_id):
     club = next((c for c in DATA.get('clubs', []) if c.get('club_id') == club_id), None)
     if not club:
         return "<p class='loading-state'>Club details not found.</p>", 404
-    partial_path = os.path.join(BASE_DIR, 'Tech Clubs', 'club_details_partial.html')
+    partial_path = os.path.join(BASE_DIR, 'template', 'club_details_partial.html')
     if os.path.exists(partial_path):
-        return render_template('Tech Clubs/club_details_partial.html', club=club)
+        return render_template('template/club_details_partial.html', club=club)
     return jsonify(club)
 
 @app.route('/chatbot')
