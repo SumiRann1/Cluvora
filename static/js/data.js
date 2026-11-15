@@ -36,8 +36,6 @@ function escape_html(str) {
     .replace(/'/g, '&#039;');
 }
 
-const escapeHTML = escape_html;
-
 function get_short_info(club) {
   if (club.short_description) return club.short_description;
   const desc = club.description || '';
@@ -302,4 +300,3 @@ if (typeof document !== "undefined") {
     init_theme_toggle();
   }
 }
-
