@@ -192,12 +192,16 @@ async function load_club_announcements(club) {
   if (!container) return;
 
   try {
-    const res = await fetch('/api/announcements?club=' + encodeURIComponent(club.name));
+    const res = await fetch('/announcements?club=' + encodeURIComponent(club.name), {
+      headers: { 'Accept': 'application/json' }
+    });
     const data = await res.json();
     let announcements = (data && data.announcements) ? data.announcements : [];
 
     if (announcements.length === 0) {
-      const allRes = await fetch('/api/announcements');
+      const allRes = await fetch('/announcements', {
+        headers: { 'Accept': 'application/json' }
+      });
       const allData = await allRes.json();
       if (allData && allData.announcements) {
         announcements = allData.announcements.filter(a => matches_club_announcement(a.club_name, club));

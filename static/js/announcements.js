@@ -45,7 +45,9 @@ async function loadAnnouncements() {
   if (!container) return;
 
   try {
-    const res = await fetch('/api/announcements');
+    const res = await fetch('/announcements', {
+      headers: { 'Accept': 'application/json' }
+    });
     if (!res.ok) throw new Error(`HTTP Error: ${res.status}`);
 
     const data = await res.json();
@@ -176,6 +178,9 @@ function openPostModal() {
   const modal = document.getElementById('announcement-modal');
   const feedback = document.getElementById('form-feedback');
   if (feedback) feedback.style.display = 'none';
+  if (window.resetCoordinatorAuth) {
+    window.resetCoordinatorAuth();
+  }
   if (modal) {
     modal.classList.add('is-open');
     modal.setAttribute('aria-hidden', 'false');
@@ -198,33 +203,38 @@ async function handleAnnouncementSubmit(e) {
   const submitBtn = document.getElementById('submit-announcement-btn');
   const feedback = document.getElementById('form-feedback');
 
-  const clubSelect = document.getElementById('club-select').value;
-  const customClub = document.getElementById('custom-club').value.trim();
-  const clubName = customClub || clubSelect;
+  const clubSelect = document.getElementById('club-select') ? document.getElementById('club-select').value : '';
+  const customClub = document.getElementById('custom-club') ? document.getElementById('custom-club').value.trim() : '';
+  const verifiedBadge = document.getElementById('verified-club-display') ? document.getElementById('verified-club-display').textContent.trim() : '';
+  const clubName = (clubSelect === 'custom' ? customClub : clubSelect) || customClub || (verifiedBadge && verifiedBadge !== 'Club Name' ? verifiedBadge : '');
+  const passcode = document.getElementById('verified-passcode-hidden') ? document.getElementById('verified-passcode-hidden').value : '';
 
   const title = document.getElementById('announcement-title-input').value.trim();
   const category = document.getElementById('announcement-category-select').value;
   const content = document.getElementById('announcement-content-input').value.trim();
   const eventDate = document.getElementById('announcement-date-input').value.trim();
   const link = document.getElementById('announcement-link-input').value.trim();
-  const authorName = document.getElementById('announcement-author-input').value.trim();
+  const authorRole = document.getElementById('announcement-author-role') ? document.getElementById('announcement-author-role').value : '';
+  const authorNameInput = document.getElementById('announcement-author-input') ? document.getElementById('announcement-author-input').value.trim() : '';
   const isPinned = document.getElementById('announcement-pinned-check').checked ? 1 : 0;
 
-  if (!clubName || !title || !content) {
-    feedback.textContent = 'Please fill out all required fields (Club name, Title, and Details).';
+  if (!clubName || !title || !content || !authorRole || !authorNameInput) {
+    feedback.textContent = 'Please fill out all required fields (Club name, Title, Details, Role, and Name).';
     feedback.className = 'form-feedback error';
     feedback.style.display = 'block';
     return;
   }
+
+  const authorName = `${authorNameInput} (${authorRole})`;
 
   submitBtn.disabled = true;
   submitBtn.textContent = 'Publishing...';
   feedback.style.display = 'none';
 
   try {
-    const response = await fetch('/api/announcements', {
+    const response = await fetch('/announcements', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
       body: JSON.stringify({
         club_name: clubName,
         title: title,
@@ -233,7 +243,8 @@ async function handleAnnouncementSubmit(e) {
         event_date: eventDate,
         link: link,
         author_name: authorName,
-        is_pinned: isPinned
+        is_pinned: isPinned,
+        passcode: passcode
       })
     });
 
@@ -244,6 +255,9 @@ async function handleAnnouncementSubmit(e) {
     }
 
     form.reset();
+    if (window.resetCoordinatorAuth) {
+      window.resetCoordinatorAuth();
+    }
     closePostModal();
     showToast('🎉 Announcement published successfully!', 'success');
     await loadAnnouncements();
@@ -263,7 +277,7 @@ async function handleDeleteAnnouncement(id) {
   if (!confirm('Are you sure you want to remove this announcement?')) return;
 
   try {
-    const res = await fetch(`/api/announcements/${id}`, {
+    const res = await fetch(`/announcements/${id}`, {
       method: 'DELETE'
     });
     const result = await res.json();

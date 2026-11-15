@@ -9,6 +9,7 @@ BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 load_dotenv(os.path.join(BASE_DIR, '.env'))
 
 from rag import ask
+from auth import mock_auth, init_mock_db, verify_passcode
 
 app = Flask(
     __name__,
@@ -16,6 +17,7 @@ app = Flask(
     static_folder=os.path.join(BASE_DIR, 'static'),
     static_url_path=''
 )
+app.register_blueprint(mock_auth)
 
 DB_PATH = os.path.join(BASE_DIR, 'announcements.db')
 
@@ -102,6 +104,7 @@ def init_db():
         conn.commit()
 
 init_db()
+init_mock_db()
 
 def get_short_description(desc):
     if not desc:
@@ -141,11 +144,12 @@ def societies_page():
         club['short_description'] = get_short_description(club.get('description', ''))
     return render_template('template/soc.html', clubs=soc)
 
-@app.route('/announcements')
+@app.route('/announcements', methods=['GET'])
 def announcements_page():
+    if request.headers.get('Accept') == 'application/json' or request.args.get('format') == 'json' or request.args.get('category') or request.args.get('club') or request.args.get('search'):
+        return get_announcements_api()
     return render_template('template/announcements.html')
 
-@app.route('/api/announcements', methods=['GET'])
 def get_announcements_api():
     category = request.args.get('category', '').strip()
     search = request.args.get('search', '').strip()
@@ -189,7 +193,7 @@ def get_announcements_api():
         
     return jsonify({"success": True, "announcements": announcements})
 
-@app.route('/api/announcements', methods=['POST'])
+@app.route('/announcements', methods=['POST'])
 def create_announcement_api():
     data = request.get_json(silent=True) or {}
     club_name = data.get('club_name', '').strip()
@@ -201,11 +205,18 @@ def create_announcement_api():
     author_name = data.get('author_name', '').strip()
     is_pinned = 1 if data.get('is_pinned') else 0
     
-    if not club_name or not title or not content:
+    if not club_name or not title or not content or not author_name:
         return jsonify({
             "success": False,
-            "error": "Club name, title, and announcement details are required."
+            "error": "Club name, title, announcement details, and author/role are required."
         }), 400
+
+    passcode = data.get('passcode', '').strip()
+    if passcode and not verify_passcode(club_name, passcode):
+        return jsonify({
+            "success": False,
+            "error": f"Invalid coordinator passcode for {club_name}."
+        }), 403
         
     with get_db() as conn:
         cursor = conn.cursor()
@@ -225,7 +236,7 @@ def create_announcement_api():
         "announcement": created
     }), 201
 
-@app.route('/api/announcements/<int:announcement_id>', methods=['DELETE'])
+@app.route('/announcements/<int:announcement_id>', methods=['DELETE'])
 def delete_announcement_api(announcement_id):
     with get_db() as conn:
         cursor = conn.cursor()

@@ -1,0 +1,114 @@
+.auth-step-box {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 8px 0;
+}
+
+.passcode-input-row {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.passcode-input-row .form-control {
+  padding-right: 44px;
+}
+
+.btn-toggle-eye {
+  position: absolute;
+  right: 10px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 1.1rem;
+  padding: 4px 8px;
+  color: var(--text-muted);
+  border-radius: 4px;
+  line-height: 1;
+}
+
+.btn-toggle-eye:hover {
+  color: var(--text);
+  background: var(--surface-muted);
+}
+
+.passcode-hint {
+  display: block;
+  margin-top: 6px;
+  font-size: .8rem;
+  color: var(--text-muted);
+}
+
+.auth-btn-row {
+  margin-top: 14px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.auth-submit-btn {
+  padding: 10px 22px;
+  font-size: .92rem;
+  font-weight: 700;
+}
+
+.verified-coordinator-badge {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--surface-muted);
+  margin-bottom: 18px;
+}
+
+.verified-coordinator-badge .badge-text {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: .92rem;
+}
+
+.verified-coordinator-badge strong {
+  color: var(--primary);
+  font-size: .98rem;
+}
+
+.btn-change-auth {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  font-size: .78rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all .18s ease;
+}
+
+.btn-change-auth:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.form-feedback.success {
+  color: #10b981;
+  background: rgba(16, 185, 129, .08);
+  border: 1px solid rgba(16, 185, 129, .25);
+  padding: 10px 14px;
+  border-radius: 6px;
+  font-size: .88rem;
+  margin-top: 8px;
+}
+
+.form-feedback.error {
+  color: #ef4444;
+  background: rgba(239, 68, 68, .08);
+  border: 1px solid rgba(239, 68, 68, .25);
+  padding: 10px 14px;
+  border-radius: 6px;
+  font-size: .88rem;
+  margin-top: 8px;
+}
+
