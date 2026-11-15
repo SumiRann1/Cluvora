@@ -12,6 +12,26 @@ async function render_tech_clubs_page() {
     render_cards(tech_clubs);
     search_filter();
 
+    container.addEventListener('click', (e) => {
+      const card = e.target.closest('.club-card');
+      if (!card) return;
+      const clubId = card.dataset.clubId || card.id;
+      const club = tech_clubs.find(c => (c.club_id || c.id) === clubId);
+      if (club) open_club_modal(club);
+    });
+
+    container.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        const card = e.target.closest('.club-card');
+        if (card) {
+          e.preventDefault();
+          const clubId = card.dataset.clubId || card.id;
+          const club = tech_clubs.find(c => (c.club_id || c.id) === clubId);
+          if (club) open_club_modal(club);
+        }
+      }
+    });
+
   } catch (error) {
     console.error("Failed to load tech clubs data:", error);
     container.innerHTML = `
@@ -38,54 +58,27 @@ function render_cards(clubs_2_render) {
   }
 
   container.innerHTML = clubs_2_render.map(club => {
-    const tagsList = club.tags || [club.category || "Science & Technology"];
-    const tagsHTML = tagsList.map(tag => `<li><small>${escape_html(tag)}</small></li>`).join('');
-
-    const flagshipHTML = (club.flagship_events && club.flagship_events.length > 0)
-      ? `<p><strong>Flagship Initiatives:</strong> ${escape_html(club.flagship_events.join(', '))}</p>`
-      : '';
-
-    const links = [];
-    const webUrl = club.social_links?.website || club.source_url;
-    if (webUrl) {
-      links.push(`<a href="${webUrl}" target="_blank" rel="noopener noreferrer">Official Portal &rarr;</a>`);
-    }
-    if (club.social_links?.github) {
-      links.push(`<a href="${club.social_links.github}" target="_blank" rel="noopener noreferrer">GitHub</a>`);
-    }
-    if (club.social_links?.linkedin) {
-      links.push(`<a href="${club.social_links.linkedin}" target="_blank" rel="noopener noreferrer">LinkedIn</a>`);
-    }
-    if (club.leads?.[0]?.email) {
-      links.push(`<a href="mailto:${club.leads[0].email}">${escape_html(club.leads[0].email)}</a>`);
-    }
-
     const rawLogo = club.logo_url || '/assets/logos/iitbh-logo.jpg';
     const logoPath = rawLogo.startsWith('.') ? rawLogo : `./..${rawLogo}`;
+    const shortDesc = get_short_info(club);
 
     return `
-      <article class="club-card" id="${escape_html(club.club_id || '')}">
+      <article class="club-card" id="${escape_html(club.club_id || '')}" data-club-id="${escape_html(club.club_id || '')}" role="button" tabindex="0" aria-label="View details for ${escape_html(club.name)}">
         <header class="club-header">
-          <a class="club-logo" href="${webUrl || '#'}" target="_blank" rel="noopener noreferrer">
-            <img src="${logoPath}" alt="${escape_html(club.name)} Logo" width="64" height="64" style="width: 64px; height: 64px; object-fit: contain;">
-          </a>
+          <div class="club-logo">
+            <img src="${logoPath}" alt="${escape_html(club.name)} Logo" width="64" height="64" style="width: 64px; height: 64px; object-fit: contain;" onerror="this.onerror=null;this.src='/assets/logos/cosa-crest.svg';">
+          </div>
           <div>
             <h2 class="club-title">${escape_html(club.name)}</h2>
             ${club.tagline ? `<p class="club-tagline"><em>${escape_html(club.tagline)}</em></p>` : ''}
           </div>
         </header>
 
-        <p class="club-desc">${escape_html(club.description || '')}</p>
+        <p class="club-desc">${escape_html(shortDesc)}</p>
 
-        <ul class="club-tags" aria-label="Tags">
-          ${tagsHTML}
-        </ul>
-
-        ${flagshipHTML}
-
-        <nav class="club-links" aria-label="${escape_html(club.name)} links">
-          ${links.length > 0 ? links.join(' | ') : '<a href="/contact">Contact via CoSA</a>'}
-        </nav>
+        <div class="club-card-hint">
+          <span>Click to view details &amp; events &rarr;</span>
+        </div>
       </article>
     `;
   }).join('');

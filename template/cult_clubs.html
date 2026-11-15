@@ -86,44 +86,11 @@
       </div>
     </section>
 
-    <!-- Search filter wrapper -->
-    <div id="search-filter-wrapper" class="search-wrapper wrap">
-      <div>
-        <input type="text" id="club-search-input" class="search-input" placeholder="Search cultural clubs by name, keywords, or domain..." />
-      </div>
-    </div>
-
     <section class="club-grid" id="cult-list" aria-label="Cultural Council clubs">
-      {% if clubs %}
-        {% for club in clubs %}
-        <article class="club-card" id="{{ club.club_id }}" tabindex="0" role="region" aria-label="{{ club.name }}">
-          <header class="club-header">
-            <a class="club-logo" href="{{ club.social_links.website or '#' }}" {% if club.social_links.website %}target="_blank" rel="noopener noreferrer"{% endif %} title="{{ club.name }}">
-              <img src="{{ club.logo_url or '/assets/logos/cosa-crest.svg' }}" alt="{{ club.name }} Logo" width="64" height="64" style="width: 64px; height: 64px; object-fit: contain;">
-            </a>
-            <div>
-              <h2 class="club-title">{{ club.name }}</h2>
-              {% if club.tagline %}<p class="club-tagline"><em>{{ club.tagline }}</em></p>{% endif %}
-            </div>
-          </header>
-
-          <p class="club-desc club-desc-preview">{{ club.short_description }}</p>
-
-          <div class="club-details-wrapper" id="details-{{ club.club_id }}">
-            <!-- Dynamically populated from Python route /club/{{ club.club_id }}/details -->
-          </div>
-
-          <button type="button" class="club-expand-btn" data-url="/club/{{ club.club_id }}/details" aria-expanded="false" aria-controls="details-{{ club.club_id }}">
-            <span class="expand-btn-text">View full details</span>
-            <span class="expand-arrow" aria-hidden="true">&darr;</span>
-          </button>
-        </article>
-        {% endfor %}
-      {% else %}
-        <div class="loading-state empty-state">
-          <h3>No cultural clubs found.</h3>
-        </div>
-      {% endif %}
+      <div id="loading-spinner" class="loading-state">
+        <span class="loading-spinner" aria-hidden="true"></span>
+        <p>Loading Cultural Council clubs...</p>
+      </div>
     </section>
 
     <section class="section tinted closing-section">
@@ -162,6 +129,8 @@
       </div>
     </div>
   </footer>
+
+  <dialog id="club-details-dialog" class="club-modal-dialog" aria-modal="true" role="dialog"></dialog>
 
   <script src="/js/data.js" defer></script>
   <script src="/js/cult_clubs.js" defer></script>

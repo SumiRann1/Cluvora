@@ -136,7 +136,7 @@ def cultural_clubs_page():
 
 @app.route('/societies')
 def societies_page():
-    soc = [c for c in DATA.get('clubs', []) if 'Society' in c.get('name', '') or 'Society' in c.get('category', '') or c.get('parent_council') in ['Student Welfare and Governance', 'Sports Council']]
+    soc = [c for c in DATA.get('clubs', []) if c.get('parent_council') in ['Student Welfare and Governance', 'Sports Council'] or c.get('category') in ['Welfare & Governance', 'Sports']]
     for club in soc:
         club['short_description'] = get_short_description(club.get('description', ''))
     return render_template('template/soc.html', clubs=soc)
@@ -149,6 +149,7 @@ def announcements_page():
 def get_announcements_api():
     category = request.args.get('category', '').strip()
     search = request.args.get('search', '').strip()
+    club = request.args.get('club', '').strip()
     
     query = 'SELECT * FROM announcements'
     params = []
@@ -157,6 +158,18 @@ def get_announcements_api():
     if category and category.lower() != 'all':
         conditions.append('LOWER(category) = LOWER(?)')
         params.append(category)
+
+    if club:
+        norm_club = re.sub(r'[^a-z0-9]', '', club.lower())
+        conditions.append('''
+            (
+                LOWER(club_name) LIKE ? 
+                OR LOWER(?) LIKE '%' || LOWER(club_name) || '%'
+                OR REPLACE(REPLACE(LOWER(club_name), ' ', ''), '-', '') LIKE ?
+                OR ? LIKE '%' || REPLACE(REPLACE(LOWER(club_name), ' ', ''), '-', '') || '%'
+            )
+        ''')
+        params.extend([f'%{club.lower()}%', club.lower(), f'%{norm_club}%', norm_club])
         
     if search:
         conditions.append('(LOWER(title) LIKE ? OR LOWER(content) LIKE ? OR LOWER(club_name) LIKE ?)')

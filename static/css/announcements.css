@@ -229,6 +229,7 @@
   align-items: baseline;
   justify-content: space-between;
   margin-bottom: 24px;
+  scroll-margin-top: 36px;
 }
 
 .feed-header h2 {

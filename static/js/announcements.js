@@ -53,6 +53,12 @@ async function loadAnnouncements() {
 
     updateStats();
     renderAnnouncements();
+    if (window.location.hash === '#latest-broadcasts') {
+      const target = document.getElementById('latest-broadcasts');
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
   } catch (err) {
     console.error('Error fetching announcements:', err);
     container.innerHTML = `
