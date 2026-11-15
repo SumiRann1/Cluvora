@@ -11,7 +11,8 @@ from .state import AgentState
 def get_embeddings_adapter():
     try:
         from fastembed import TextEmbedding
-        embedder = TextEmbedding(model_name="sentence-transformers/all-MiniLM-L6-v2")
+        cache_dir = os.path.expanduser("~/.cache/fastembed")
+        embedder = TextEmbedding(model_name="sentence-transformers/all-MiniLM-L6-v2", cache_dir=cache_dir)
         return type(
             'FastEmbedAdapter',
             (Embeddings,),

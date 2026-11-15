@@ -9,7 +9,7 @@ async function get_CoSA_data() {
   }
 
   if (!data_fetched) {
-    data_fetched = fetch('./../iit_bhilai_cosa_data.json')
+    data_fetched = fetch('/iit_bhilai_cosa_data.json')
       .then(response => {
         if (!response.ok) {
           throw new Error(`HTTP Error: ${response.status} ${response.statusText}`);
@@ -69,5 +69,4 @@ if (typeof document !== "undefined") {
     init_theme_toggle();
   }
 }
-
 
