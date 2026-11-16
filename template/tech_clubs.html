@@ -13,8 +13,7 @@
   <title>Tech Clubs | Cluvora — IIT Bhilai</title>
   <script>
     const saved_theme = localStorage.getItem("theme");
-    const prefers_dark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-    document.documentElement.setAttribute("data-theme", saved_theme || (prefers_dark ? "dark" : "light"));
+    document.documentElement.setAttribute("data-theme", saved_theme || "light");
   </script>
 </head>
 
