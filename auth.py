@@ -1,19 +1,13 @@
-import os
 import re
-import sqlite3
 from flask import Blueprint, request, jsonify
+from database import get_db, clean_text
 
 coordinator_auth = Blueprint('coordinator_auth', __name__)
-BASE_DIR = os.path.abspath(os.path.dirname(__file__))
-DB_PATH = os.path.join(BASE_DIR, 'announcements.db')
 
-def get_db():
-    conn = sqlite3.connect(DB_PATH)
-    conn.row_factory = sqlite3.Row
-    return conn
-
-def clean_text(text):
-    return re.sub(r'[^a-z0-9]', '', (text or '').lower())
+def matches_club(clean_club, row):
+    key = clean_text(row['club_key'])
+    name = clean_text(row['club_name'])
+    return clean_club in (key, name) or clean_club.startswith(key) or key in clean_club or name in clean_club
 
 def init_auth_db():
     with get_db() as conn:
@@ -33,13 +27,12 @@ def init_auth_db():
             ("dsai", "DSAI", "dsai@2026", "Sci-Tech"),
             ("electromos", "Electromos", "electromos@2026", "Sci-Tech"),
             ("ingenuity", "Ingenuity", "ingenuity@2026", "Sci-Tech"),
-            ("epsilon", "Epsilon", "epsilon@2026", "Sci-Tech"),
-            ("ses", "SES", "ses@2026", "Sci-Tech"),
+            ("epsilon", "The Epsilon Club", "epsilon@2026", "Sci-Tech"),
+            ("ses", "Space Exploration Society (SES)", "ses@2026", "Sci-Tech"),
             ("motorsports", "Motorsports", "motorsports@2026", "Sci-Tech"),
             ("bib", "BIB", "bib@2026", "Sci-Tech"),
             ("gdg", "GDG", "gdg@2026", "Sci-Tech"),
             ("tps", "TPS", "tps@2026", "Sci-Tech"),
-            ("designx", "DesignX", "designx@2026", "Sci-Tech"),
             ("beathackers", "Beat Hackers", "beathackers@2026", "Cultural"),
             ("swara", "Swara", "swara@2026", "Cultural"),
             ("drishya", "Drishya", "drishya@2026", "Cultural"),
@@ -47,8 +40,10 @@ def init_auth_db():
             ("renaissance", "Renaissance", "renaissance@2026", "Cultural"),
             ("spicmacay", "SPIC MACAY", "spicmacay@2026", "Cultural"),
             ("goals", "GOALS", "goals@2026", "Cultural"),
-            ("inside", "Inside Club", "inside@2026", "Cultural"),
-            ("fps", "FPS", "fps@2026", "Cultural"),
+            ("designx", "DesignX", "designx@2026", "Cultural"),
+            ("inside", "Inside Club", "inside@2026", "General"),
+            ("fps", "Film Production Society (FPS)", "fps@2026", "General"),
+            ("pixelsnappers", "The Pixel Snappers", "pixelsnappers@2026", "General"),
             ("sports", "Sports Council", "sports@2026", "Sports"),
             ("polaris", "Polaris", "polaris@2026", "General"),
             ("nss", "NSS", "nss@2026", "General"),
@@ -71,9 +66,7 @@ def get_club_category(club_name):
         cursor.execute('SELECT club_key, club_name, category FROM coordinator_passcodes')
         rows = cursor.fetchall()
         for r in rows:
-            key = clean_text(r['club_key'])
-            name = clean_text(r['club_name'])
-            if clean_club in (key, name) or clean_club.startswith(key) or key in clean_club or name in clean_club:
+            if matches_club(clean_club, r):
                 return r['category'] or 'General'
     return 'General'
 
@@ -92,45 +85,49 @@ def verify_passcode(club_name, passcode):
         cursor.execute('SELECT club_key, club_name, passcode FROM coordinator_passcodes')
         rows = cursor.fetchall()
         for r in rows:
-            key = clean_text(r['club_key'])
-            name = clean_text(r['club_name'])
-            if clean_club in (key, name) or clean_club.startswith(key) or key in clean_club or name in clean_club:
+            if matches_club(clean_club, r):
+                key = clean_text(r['club_key'])
                 if r['passcode'] == entered_passcode or entered_passcode == f"{key}@2026" or entered_passcode == f"{key}123":
                     return True
     return False
 
 
+@coordinator_auth.route('/api/coordinator/verify', methods=['POST'])
 @coordinator_auth.route('/verify-coordinator', methods=['POST'])
-def verify_coordinator_api():
-    post_data = request.get_json(silent=True) or {}
-    club_name = post_data.get('club_name', '').strip()
-    passcode = post_data.get('passcode', '').strip()
+def verify_coordinator_route():
+    data = request.get_json(silent=True) or {}
+    club_name = data.get('club_name', '').strip()
+    passcode = data.get('passcode', '').strip()
 
-    if not club_name:
-        return jsonify({"success": False, "error": "Please select a club or society."}), 400
-
-    if not passcode:
-        return jsonify({"success": False, "error": "Please enter the coordinator passcode."}), 400
+    if not club_name or not passcode:
+        return jsonify({
+            'success': False,
+            'message': 'Please provide both club name and passcode.',
+            'error': 'Please provide both club name and passcode.'
+        }), 400
 
     if verify_passcode(club_name, passcode):
+        category = get_club_category(club_name)
         return jsonify({
-            "success": True,
-            "message": "Passcode verified successfully.",
-            "club_name": club_name,
-            "category": get_club_category(club_name)
+            'success': True,
+            'message': f'Access granted for {club_name}.',
+            'club_name': club_name,
+            'category': category
         }), 200
     else:
         return jsonify({
-            "success": False,
-            "error": f"Incorrect passcode for {club_name}. Please try again."
+            'success': False,
+            'message': 'Invalid passcode. Please check and try again.',
+            'error': 'Invalid passcode. Please check and try again.'
         }), 401
 
 
+@coordinator_auth.route('/api/coordinator/clubs', methods=['GET'])
 @coordinator_auth.route('/coordinator-clubs', methods=['GET'])
-def get_coordinator_clubs_api():
+def list_clubs():
     with get_db() as conn:
         cursor = conn.cursor()
         cursor.execute('SELECT club_key, club_name, category FROM coordinator_passcodes ORDER BY category, club_name')
         rows = cursor.fetchall()
-        clubs = [dict(r) for r in rows]
-    return jsonify({"success": True, "clubs": clubs})
+        clubs = [{'key': r['club_key'], 'name': r['club_name'], 'category': r['category']} for r in rows]
+    return jsonify({'success': True, 'clubs': clubs})

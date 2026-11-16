@@ -89,21 +89,27 @@ function render_cards(clubs_2_render) {
 }
 
 function search_filter() {
-  const main = document.querySelector('main');
   const container = document.getElementById('soc-teams-list');
-  if (!main || !container || document.getElementById('club-search-input')) return;
+  let searchInput = document.getElementById('club-search-input');
 
-  const searchWrapper = document.createElement('div');
-  searchWrapper.id = 'search-filter-wrapper';
-  searchWrapper.className = 'search-wrapper wrap';
-  searchWrapper.innerHTML = `
-    <div>
-      <input type="text" id="club-search-input" class="search-input" placeholder="🔍 Search clubs by name, keywords, or domain..." />
-    </div>
-  `;
-  main.insertBefore(searchWrapper, container);
+  if (!searchInput) {
+    const main = document.querySelector('main');
+    if (!main || !container) return;
 
-  const searchInput = document.getElementById('club-search-input');
+    const searchWrapper = document.createElement('div');
+    searchWrapper.id = 'search-filter-wrapper';
+    searchWrapper.className = 'search-wrapper wrap';
+    searchWrapper.innerHTML = `
+      <div>
+        <input type="text" id="club-search-input" class="search-input" placeholder="🔍 Search societies and campus bodies by name, keywords, or domain..." />
+      </div>
+    `;
+    main.insertBefore(searchWrapper, container);
+    searchInput = document.getElementById('club-search-input');
+  }
+
+  if (!searchInput) return;
+
   searchInput.addEventListener('input', (e) => {
     const query = e.target.value.toLowerCase().trim();
     if (!query) {

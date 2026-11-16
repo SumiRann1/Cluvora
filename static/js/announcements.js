@@ -282,8 +282,6 @@ async function handle_delete_announcement(id) {
   }
 }
 
-window.open_post_modal = open_post_modal;
-window.close_post_modal = close_post_modal;
 window.handle_delete_announcement = handle_delete_announcement;
 window.load_announcements = load_announcements;
 
@@ -329,19 +327,5 @@ document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('post-announcement-form');
   if (form) {
     form.addEventListener('submit', handle_announcement_submit);
-  }
-
-  const club_select = document.getElementById('club-select');
-  const custom_club_wrap = document.getElementById('custom-club-wrap');
-  if (club_select && custom_club_wrap) {
-    club_select.addEventListener('change', () => {
-      if (club_select.value === 'custom') {
-        custom_club_wrap.style.display = 'block';
-        document.getElementById('custom-club').focus();
-      } else {
-        custom_club_wrap.style.display = 'none';
-        document.getElementById('custom-club').value = '';
-      }
-    });
   }
 });

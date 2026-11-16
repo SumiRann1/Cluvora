@@ -1,12 +1,8 @@
 import os
 import json
-import re
-from typing import List, Dict, Any
-from langchain_core.documents import Document
 from langchain_core.vectorstores import InMemoryVectorStore
 from langchain_core.embeddings import Embeddings
 from .loader import get_documents
-from .state import AgentState
 
 def get_embeddings_adapter():
     try:
