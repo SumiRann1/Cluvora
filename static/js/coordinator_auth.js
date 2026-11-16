@@ -1,7 +1,6 @@
-let verified_club = '';
-let verified_passcode = '';
-
 function init_coordinator_auth() {
+  let verified_club = '';
+  let verified_passcode = '';
   const club_select = document.getElementById('club-select');
   const custom_club_wrap = document.getElementById('custom-club-wrap');
   const custom_club_input = document.getElementById('custom-club');

@@ -26,7 +26,6 @@
   - [Core Subsystem Architecture](#core-subsystem-architecture)
 - [RAG Bot Architecture & Pipeline](#-rag-bot-architecture--pipeline)
   - [LangGraph StateGraph Workflow](#langgraph-stategraph-workflow)
-  - [Lifecycle Sequence Diagram](#lifecycle-sequence-diagram)
   - [Subsystem Component Breakdown](#subsystem-component-breakdown)
 - [Tech Stack](#-tech-stack)
 - [Project Directory Structure](#-project-directory-structure)
@@ -131,7 +130,7 @@ flowchart TD
 ┌────────────────────────────────────────────────────────────────────────┐
 │                        Client Web Interface                            │
 │  - Vanilla JavaScript Modules (announcements.js, coordinator_auth.js)  │
-│  - HTML5 <dialog> Modals & Deep Link Routing (club_modal.js)           │
+│  - HTML5 <dialog> Modals & Deep Link Routing (data.js)                 │
 │  - Theme Toggle Engine (Dark/Light LocalStorage Sync)                  │
 └───────────────────────────────────┬────────────────────────────────────┘
                                     │ HTTP Requests / JSON APIs
@@ -182,41 +181,6 @@ The conversational engine uses a compiled **LangGraph `StateGraph`** with explic
                ┌───────────────────────┐
                │          END          │
                └───────────────────────┘
-```
-
-### Lifecycle Sequence Diagram
-
-```mermaid
-sequenceDiagram
-    autonumber
-    actor Student as Student (Web Browser)
-    participant ChatJS as chatbot.js (Frontend)
-    participant Flask as Flask Server (/chat)
-    participant Graph as LangGraph Orchestrator
-    participant Retriever as FastEmbed MMR Retriever
-    participant LLM as ChatOpenRouter (LLM)
-
-    Student->>ChatJS: Types question & clicks Send / Chip query
-    ChatJS->>ChatJS: Render user message & show typing bubble
-    ChatJS->>Flask: POST /chat {"message": "What are the hostel rules?"}
-    Flask->>Graph: run_rag(question, top_k=3)
-    Note over Graph: Initialize AgentState(question, top_k, docs=[], answer="")
-    
-    Graph->>Retriever: retrieve_node(state)
-    Retriever->>Retriever: Query vectorstore with MMR (k=4, fetch_k=20)
-    Retriever-->>Graph: Return top relevant Document chunks + metadata
-    Note over Graph: Mutates state: state["documents"] = docs
-    
-    Graph->>LLM: generate_node(state)
-    Note over LLM: Formats Context: [Title - Page X]: ...
-    Note over LLM: Injects SMP Senior Mentor System Prompt
-    LLM-->>Graph: Grounded answer with [Page X] citations
-    Note over Graph: Mutates state: state["answer"] & state["sources"]
-    
-    Graph-->>Flask: {"answer": ..., "sources": [{"page": 45, "title": "..."}]}
-    Flask-->>ChatJS: HTTP 200 JSON Response
-    ChatJS->>ChatJS: Hide typing bubble & render Markdown bubble
-    ChatJS->>Student: Display answer with interactive brochure page pills
 ```
 
 ### Subsystem Component Breakdown
@@ -270,7 +234,8 @@ sequenceDiagram
 ```text
 Cluvora/
 ├── auth.py                     # Coordinator passcode verification blueprint & endpoints
-├── main.py                     # Main application entry point, routes & announcements API
+├── database.py                 # SQLite database layer (connections, schemas & announcements CRUD)
+├── main.py                     # Main application entry point, route controllers & API endpoints
 ├── announcements.db            # SQLite database (announcements & coordinator credentials)
 ├── requirements.txt            # Python dependencies (Flask, LangGraph, FastEmbed, etc.)
 ├── .env.example                # Sample environment variables template
@@ -294,16 +259,19 @@ Cluvora/
 │   │   ├── announcements.css   # Broadcast cards, filter pills & modal styling
 │   │   ├── coordinator_auth.css# Passcode modal & verified badge styling
 │   │   ├── chatbot.css         # Campus guide interface & typing indicators
-│   │   ├── club_cards.css      # Modal profile dialogs & deep link cards
+│   │   ├── cult_clubs.css      # Cultural Council clubs grid layout
+│   │   ├── tech_clubs.css      # Sci-Tech Council clubs grid layout
+│   │   ├── soc.css             # Societies & campus life grid layout
 │   │   └── contact_us.css      # Directory & contact layout styling
 │   ├── js/                     # Client-Side JavaScript Controllers
 │   │   ├── home.js             # Landing page interactive logo grid
 │   │   ├── announcements.js    # Announcements feed, filter tabs & posting modal
 │   │   ├── coordinator_auth.js # Coordinator authentication & password handling
-│   │   ├── club_modal.js       # HTML5 dialog modal trigger & deep link handler
-│   │   ├── club_search.js      # Progressive enhancement real-time club filter
 │   │   ├── chatbot.js          # RAG chat streaming & Markdown renderer
-│   │   └── data.js             # Data fetching & HTML sanitization utilities
+│   │   ├── cult_clubs.js       # Cultural clubs controller & search
+│   │   ├── tech_clubs.js       # Tech clubs controller & search
+│   │   ├── soc.js              # Societies controller & search
+│   │   └── data.js             # Shared data loader, HTML escaping & dialog modal controller
 │   └── iit_bhilai_cosa_data.json # Master dataset for councils, clubs & PORs
 └── template/                   # Jinja2 HTML Templates
     ├── index.html              # Home page
@@ -312,8 +280,7 @@ Cluvora/
     ├── soc.html                # Sports Council & Welfare societies directory
     ├── announcements.html      # Live announcements board & posting interface
     ├── chatbot.html            # AI Campus Guide chat interface
-    ├── contact_us.html         # CoSA secretariat directory & contact form
-    └── club_details_partial.html # Server-side rendered club modal partial
+    └── contact_us.html         # CoSA secretariat directory & contact form
 ```
 
 ---
@@ -442,7 +409,6 @@ http://127.0.0.1:5000/
 | `DELETE` | `/announcements/<id>` | Remove an announcement | Coordinator | URL parameter: `id` |
 | `POST` | `/verify-coordinator` | Verify coordinator passcode | Public | `{"club_name": "OpenLake", "passcode": "openlake@2026"}` |
 | `GET` | `/coordinator-clubs` | List clubs with passcode support | Public | None |
-| `GET` | `/club/<club_id>/details` | SSR partial for club profile modal | Public | URL parameter: `club_id` (e.g. `openlake`) |
 | `GET` | `/chatbot` | Campus Guide chatbot interface | Public | None |
 | `POST` | `/chat` | Submit inquiry to RAG agent | Public | `{"message": "What are the hostel timings?"}` |
 
